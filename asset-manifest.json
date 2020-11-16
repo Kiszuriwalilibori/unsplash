@@ -1,0 +1,32 @@
+{
+  "files": {
+    "static/js/0.4ac7559b.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/0.4ac7559b.chunk.js",
+    "static/js/0.4ac7559b.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/0.4ac7559b.chunk.js.map",
+    "main.css": "/Kiszuriwalilibori/unsplash/static/css/main.0658719f.chunk.css",
+    "main.js": "/Kiszuriwalilibori/unsplash/static/js/main.7c9a84f9.chunk.js",
+    "main.js.map": "/Kiszuriwalilibori/unsplash/static/js/main.7c9a84f9.chunk.js.map",
+    "runtime-main.js": "/Kiszuriwalilibori/unsplash/static/js/runtime-main.2ec15bdf.js",
+    "runtime-main.js.map": "/Kiszuriwalilibori/unsplash/static/js/runtime-main.2ec15bdf.js.map",
+    "static/js/3.027ba228.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/3.027ba228.chunk.js",
+    "static/js/3.027ba228.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/3.027ba228.chunk.js.map",
+    "static/js/4.c2c17a80.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/4.c2c17a80.chunk.js",
+    "static/js/4.c2c17a80.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/4.c2c17a80.chunk.js.map",
+    "static/js/5.0636e2f1.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/5.0636e2f1.chunk.js",
+    "static/js/5.0636e2f1.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/5.0636e2f1.chunk.js.map",
+    "static/js/6.78c88643.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/6.78c88643.chunk.js",
+    "static/js/6.78c88643.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/6.78c88643.chunk.js.map",
+    "static/js/7.f220e321.chunk.js": "/Kiszuriwalilibori/unsplash/static/js/7.f220e321.chunk.js",
+    "static/js/7.f220e321.chunk.js.map": "/Kiszuriwalilibori/unsplash/static/js/7.f220e321.chunk.js.map",
+    "index.html": "/Kiszuriwalilibori/unsplash/index.html",
+    "static/css/main.0658719f.chunk.css.map": "/Kiszuriwalilibori/unsplash/static/css/main.0658719f.chunk.css.map",
+    "static/js/0.4ac7559b.chunk.js.LICENSE.txt": "/Kiszuriwalilibori/unsplash/static/js/0.4ac7559b.chunk.js.LICENSE.txt",
+    "static/js/3.027ba228.chunk.js.LICENSE.txt": "/Kiszuriwalilibori/unsplash/static/js/3.027ba228.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/Kiszuriwalilibori/unsplash/static/media/background_tablet.1871d418.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2ec15bdf.js",
+    "static/js/3.027ba228.chunk.js",
+    "static/css/main.0658719f.chunk.css",
+    "static/js/main.7c9a84f9.chunk.js"
+  ]
+}
