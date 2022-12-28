@@ -1,0 +1,309 @@
+@import "variables";
+@import "mixins";
+@import "commons";
+@import "search";
+@import "form";
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.background__picture {
+  display: block;
+  height: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.38) 0,
+      rgba(0, 0, 0, 0.38) 3.5%,
+      rgba(0, 0, 0, 0.379) 7%,
+      rgba(0, 0, 0, 0.377) 10.35%,
+      rgba(0, 0, 0, 0.375) 13.85%,
+      rgba(0, 0, 0, 0.372) 17.35%,
+      rgba(0, 0, 0, 0.369) 20.85%,
+      rgba(0, 0, 0, 0.366) 24.35%,
+      rgba(0, 0, 0, 0.364) 27.85%,
+      rgba(0, 0, 0, 0.361) 31.35%,
+      rgba(0, 0, 0, 0.358) 34.85%,
+      rgba(0, 0, 0, 0.355) 38.35%,
+      rgba(0, 0, 0, 0.353) 41.85%,
+      rgba(0, 0, 0, 0.351) 45.35%,
+      rgba(0, 0, 0, 0.35) 48.85%,
+      rgba(0, 0, 0, 0.353) 52.35%,
+      rgba(0, 0, 0, 0.36) 55.85%,
+      rgba(0, 0, 0, 0.371) 59.35%,
+      rgba(0, 0, 0, 0.385) 62.85%,
+      rgba(0, 0, 0, 0.402) 66.35%,
+      rgba(0, 0, 0, 0.42) 69.85%,
+      rgba(0, 0, 0, 0.44) 73.35%,
+      rgba(0, 0, 0, 0.46) 76.85%,
+      rgba(0, 0, 0, 0.48) 80.35%,
+      rgba(0, 0, 0, 0.498) 83.85%,
+      rgba(0, 0, 0, 0.515) 87.35%,
+      rgba(0, 0, 0, 0.529) 90.85%,
+      rgba(0, 0, 0, 0.54) 94.35%,
+      rgba(0, 0, 0, 0.547) 97.85%,
+      rgba(0, 0, 0, 0.55)
+    );
+  }
+}
+
+.background__image {
+  font-family: "object-fit:cover";
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.images__background {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: white;
+}
+
+.images__subject {
+  width: 66.66667%;
+  font-size: 46px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 16px;
+  margin-top: 0;
+  color: $color-dark-1;
+
+  @media (min-width: 768px) {
+    width: 83.33333%;
+  }
+}
+
+.images__header {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 60px;
+  padding-bottom: 72px;
+  position: relative;
+  padding-left: $fotos-padding;
+
+  @media (min-width: 768px) {
+    padding-top: 60px;
+    padding-bottom: 72px;
+  }
+}
+
+.fotos__container {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: $color-dark-1;
+}
+
+.fotos__wrapper {
+  padding-left: $fotos-padding;
+  padding-right: $fotos-padding;
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fotos__wrapper--form {
+  @extend .fotos__wrapper;
+  padding-top: 12px;
+}
+
+.fotos__grid {
+  columns: 1;
+  @include min768 {
+    columns: 2;
+  }
+  @include min992 {
+    columns: 3;
+  }
+}
+
+.container-for-tags {
+  position: absolute;
+  bottom: 0;
+  margin-left: -6px;
+  left: 0;
+}
+.fotos__box {
+  padding-bottom: $grid-gutter;
+  padding-top: $grid-gutter;
+  @include max768 {
+    display: flex;
+    flex-direction: column;
+  }
+  @include min992 {
+    display: block;
+  }
+  position: relative;
+  visibility: hidden;
+  &:hover {
+    &::after {
+      content: attr(data-description);
+      position: absolute;
+      top: -20px;
+      left: 0;
+      z-index: 2000;
+      padding: 2 * $grid-gutter 1rem 0 1rem;
+      color: white;
+      font-size: 18px;
+      width: calc(100% - 2 * $grid-gutter);
+    }
+    &::before {
+      content: attr(data-user);
+      position: absolute;
+      bottom: 60px;
+      left: 0;
+      z-index: 2000;
+      padding: 3 * $grid-gutter 1rem 0 1rem;
+      color: white;
+      font-size: 18px;
+      width: 100%;
+    }
+  }
+  &.visible {
+    visibility: visible;
+  }
+}
+
+.fotos__figure {
+  margin: 0;
+}
+
+.fotos__image {
+  margin-bottom: 6px;
+  padding-bottom: 24px;
+  cursor: zoom-in;
+  @include min768 {
+    margin: 0 auto 6px auto;
+  }
+  transition: all 0.1s;
+  &:hover {
+    mask-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.9) 0,
+      rgba(0, 0, 0, 0.9) 3.5%,
+      rgba(0, 0, 0, 0.89) 7%,
+      rgba(0, 0, 0, 0.88) 10.35%,
+      rgba(0, 0, 0, 0.87) 13.85%,
+      rgba(0, 0, 0, 0.86) 17.35%,
+      rgba(0, 0, 0, 0.85) 20.85%,
+      rgba(0, 0, 0, 0.84) 24.35%,
+      rgba(0, 0, 0, 0.83) 27.85%,
+      rgba(0, 0, 0, 0.82) 31.35%,
+      rgba(0, 0, 0, 0.81) 34.85%,
+      rgba(0, 0, 0, 0.8) 38.35%,
+      rgba(0, 0, 0, 0.79) 41.85%,
+      rgba(0, 0, 0, 0.78) 45.35%,
+      rgba(0, 0, 0, 0.77) 48.85%,
+      rgba(0, 0, 0, 0.76) 52.35%,
+      rgba(0, 0, 0, 0.77) 55.85%,
+      rgba(0, 0, 0, 0.78) 59.35%,
+      rgba(0, 0, 0, 0.79) 62.85%,
+      rgba(0, 0, 0, 0.8) 66.35%,
+      rgba(0, 0, 0, 0.81) 69.85%,
+      rgba(0, 0, 0, 0.82) 73.35%,
+      rgba(0, 0, 0, 0.83) 76.85%,
+      rgba(0, 0, 0, 0.84) 80.35%,
+      rgba(0, 0, 0, 0.85) 83.85%,
+      rgba(0, 0, 0, 0.86) 87.35%,
+      rgba(0, 0, 0, 0.87) 90.85%,
+      rgba(0, 0, 0, 0.88) 94.35%,
+      rgba(0, 0, 0, 0.89) 97.85%,
+      rgba(0, 0, 0, 0.9)
+    );
+  }
+}
+
+.fotos__overlay {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  // height: 100%;
+  // margin-top: $grid-gutter;
+}
+
+.fotos__tag-wrapper {
+  margin-left: -8px;
+  margin-left: -$tag-offset;
+}
+
+.fotos__tag {
+  background-color: #eee;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-bottom: 8px;
+  margin-left: $tag-offset;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.1s ease-in-out;
+  text-transform: capitalize;
+  line-height: 26px;
+  height: 26px;
+  display: inline-block;
+  color: #767676;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e1e1e1;
+    color: $color-dark-1;
+  }
+}
+
+.selector-item {
+  width: 300px;
+}
+
+.select-top {
+  @extend .search-text--smaller;
+  margin-top: 6px;
+  height: 0;
+  border: none;
+}
+
+@import "modal";
+
+.noHints {
+  height: $form-height;
+  border-radius: $form-height;
+  background-color: $form-background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+}
+.noHints--short {
+  @extend .noHints;
+  width: 60%;
+  margin: 12px auto;
+  background-color: $form-images-color;
+}
+
+.images-hint {
+  @extend .icon-button;
+  min-width: 120px;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 4px 8px 4px;
+  cursor: pointer;
+}
+
+.images-hints-wrapper {
+  @extend .fotos__wrapper;
+  margin-top: 12px;
+}
