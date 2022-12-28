@@ -1,6 +1,5 @@
 import * as React from "react";
 import debounce from "lodash/debounce";
-import PropTypes from "prop-types";
 
 import { useNavigate, useLocation } from "react-router";
 import { connect } from "react-redux";
@@ -13,11 +12,11 @@ import HintsSection from "./Hints/HintsSection";
 import SelectSection from "./SelectSection";
 
 import { clearHints } from "reduxware/redux/imagesReducer";
-
+import { RootStateType, AppDispatch, Hints } from "types";
 import { fetchImages, fetchHints } from "reduxware/redux/thunks";
 import { getFormStyle } from "js/functions";
 
-function getHovered(node) {
+function getHovered(node: HTMLElement | null) {
     if (!node) return null;
     const elements = node.querySelectorAll(":hover");
     if (!elements) return null;
@@ -25,18 +24,25 @@ function getHovered(node) {
     return arr[arr.length - 1];
 }
 
-const Form = props => {
-    const { fetchHints, hints, clearHints, fetchImages, noHintsMessageVisible } = props;
+interface Props  {
+    fetchHints: Function;
+    fetchImages: Function
+    clearHints: Function,
+    hints: Hints,
+};
+
+const Form = (props:Props) => {
+    const { fetchHints, hints, clearHints, fetchImages} = props;
     const history = useNavigate();
     const location = useLocation();
     //const refSelect = React.useRef();
     const path = location.pathname;
-    const foo = e => {
+    const foo = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         return false;
     };
 
-    function getImages(e) {
+    function getImages(e: { key: string; }) {
         if (e.key === "Enter") {
             const withHover = getHovered(document.getElementById("Select-Section-Unsplash"));
             //const withHover = getHovered(refSelect.current);
@@ -97,32 +103,28 @@ const Form = props => {
                 </BasicButton>
             </form>
             <SelectSection hints={hints} getValues={getValues} fetchImages={fetchImages} /*ref={refSelect}*/ />
-            <HintsSection path={path} hints={hints} />
-            {noHintsMessageVisible && <NoHintsMessage />}
+            <HintsSection hints={hints} />
+            <NoHintsMessage />
         </div>
     );
 };
 
-const mapDispatchToProps = dispatch => ({
-    fetchHints: str => dispatch(fetchHints(str)),
-    clearHints: str => dispatch(clearHints(str)),
-    fetchImages: str => dispatch(fetchImages(str)),
+const mapDispatchToProps = (dispatch:AppDispatch) => ({
+    fetchHints: (str:string) => dispatch(fetchHints(str)),
+    clearHints: () => dispatch(clearHints()),
+    fetchImages: (str:string) => dispatch(fetchImages(str)),
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state:RootStateType) => ({
     hints: state.images.hints,
-    noHintsMessageVisible: state.images.hintsMessageVisible,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
-Form.propTypes = {
-    fetchHints: PropTypes.func,
-    fetchImages: PropTypes.func,
-    clearHints: PropTypes.func,
-    hints: PropTypes.array,
-};
-
 /**
  * todo hints powinno być z kontekstu jest czy nie ma bo inaczej mryga
  * */
+
+
+//export const getDraw = (state: { draw: { minifigs: Minifigs } }) => state.draw.minifigs;
+//export const getRunningStatus = (state: { running: { isRunning: boolean } }) => state.running.isRunning;

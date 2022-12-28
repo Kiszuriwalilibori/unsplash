@@ -7,12 +7,6 @@ export interface Neighbours {
   previous: Previous;
   next: Next;
 }
-// export interface Data{
-//   location:
-//   user:
-//   urls: string;
-// }
-
 export interface Result {
   data: any;
   neighbours: Neighbours;
@@ -26,3 +20,13 @@ export interface Details {
   previous: Previous;
   next: Next;
 }
+
+export interface Hint {
+  label: string;
+  value: string;
+}
+
+export type Hints = Hint[];
+
+export { RootStateType, AppDispatch, GetState } from "components/AppProvider";
+

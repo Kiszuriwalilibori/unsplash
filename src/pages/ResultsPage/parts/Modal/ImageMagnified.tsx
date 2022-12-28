@@ -1,28 +1,16 @@
 import * as React from "react";
 
-import { connect } from "react-redux";
+import { shallowEqual } from "react-redux";
 
 import HeaderIcons from "../HeaderIcons";
 import Icons from "icons";
+
 import { Image, AuthorProfileImage, AuthorNameTwitter, ToPreviousImage, ToNextImage, AuthorDataContainer, ModalCloseButton, ModalFadeContainer, ImageLocation } from "./parts";
 import { withDescription, WithButtonAndWrapperForIcon } from "HOCs";
-import { RootStateType } from "components/AppProvider";
+import { useTypedSelector } from "hooks/useTypedSelector";
 
-interface Props {
-  tabindex?: string;
-  details: {
-    previous: string;
-    next: string;
-    author: string;
-    location: string;
-    twitter: string;
-    profileImage: string;
-    urls: string;
-  };
-}
-
-const ImageMagnified = (props: Props) => {
-  const { previous, next, location, author, twitter, urls, profileImage } = props.details;
+const ImageMagnified = () => {
+  const { previous, next, location, author, twitter, urls, profileImage } = useTypedSelector(state=>state.modal.details, shallowEqual);
   return urls ? (
     <ModalFadeContainer>
       <ModalCloseButton />
@@ -58,11 +46,7 @@ const ImageMagnified = (props: Props) => {
   ) : null;
 };
 
-const mapStateToProps = (state: RootStateType) => ({
-  details: state.modal.details,
-});
-const SingleImageMagnified = connect(mapStateToProps, {})(ImageMagnified);
-export default SingleImageMagnified;
+export default ImageMagnified;
 
 /**
  * todo własciwie urls jest mocno wykluczjące, może by pobrać i sprawdzić urls o poziom wyżej

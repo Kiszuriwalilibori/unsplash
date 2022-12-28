@@ -1,6 +1,6 @@
 import * as React from "react";
 import Select from "react-select";
-import { Hints } from "./Hints/model";
+import { Hints} from "types";
 import { useNavigate, useLocation } from "react-router";
 
 interface Props {

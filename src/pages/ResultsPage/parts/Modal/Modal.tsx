@@ -2,7 +2,7 @@ import * as React from "react";
 import Modal from '@mui/material/Modal';
 import { connect } from "react-redux";
 
-import { RootStateType } from "components/AppProvider";
+import { RootStateType } from "types";
 import ImageMagnified from "./ImageMagnified";
 
 interface Props {
@@ -24,4 +24,4 @@ const mapStateToProps = (state: RootStateType) => ({
   isModalVisible: state.modal.isVisible,
 });
 
-export default connect(mapStateToProps, null)(MyModal);
+export default connect(mapStateToProps, {})(MyModal);

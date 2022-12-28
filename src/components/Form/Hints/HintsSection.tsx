@@ -2,7 +2,7 @@ import * as React from "react";
 import uuid from "react-uuid";
 
 import Hint from "./Hint";
-import { Hints } from "./model";
+import { Hints } from "types";
 import { useLocation } from "react-router";
 
 interface Props {

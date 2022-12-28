@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Hint } from "./model";
+import { Hint } from "types";
 
 interface Props {
   hint: Hint;

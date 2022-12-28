@@ -1,5 +1,5 @@
 import Unsplash, { toJson } from "unsplash-js";
-import { showError, clearHints, getHints } from "reduxware/redux/imagesReducer";
+import { showError, clearHints, getHints, hideHintsMsg } from "reduxware/redux/imagesReducer";
 import { getTags, getOptions } from "js/functions";
 import { accessKey } from "js/fixtures";
 
@@ -25,6 +25,7 @@ export function fetchHints(pattern) {
       if (getState().images.hints.length) {
         dispatch(clearHints());
       }
+      dispatch(hideHintsMsg())
     }
   };
 }

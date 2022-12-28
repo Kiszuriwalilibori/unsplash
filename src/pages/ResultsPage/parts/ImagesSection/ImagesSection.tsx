@@ -1,9 +1,8 @@
-import { useEffect, useCallback } from "react";
+import React,{ useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 
 import debounce from "lodash/debounce";
 import handleViewport from "react-in-viewport";
-import PropTypes from "prop-types";
 import uuid from "react-uuid";
 
 import Image from "../Image";
@@ -13,12 +12,19 @@ import ImagesContainer from "./ImagesContainer";
 
 import { fetchImages } from "reduxware/redux/thunks";
 import { fetchDetails } from "reduxware/redux/thunks";
+import { AppDispatch, RootStateType } from "types";
 
 const ViewportBlock = handleViewport(Block);
 
-const ImagesSection = props => {
-  const { images, fetchDetails, fetchImages, subject } = props;
+interface Props{
+  images: any[];
+  fetchImages: Function;
+  fetchDetails: Function;
+  subject: string;
+}
 
+const ImagesSection = (props:Props) => {
+  const { images, fetchDetails, fetchImages, subject } = props;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleScrollBottom = useCallback(
     debounce(() => {
@@ -27,16 +33,18 @@ const ImagesSection = props => {
     [fetchImages, subject]
   );
 
-  useEffect(() => {
-    window.addEventListener(
-      "click",
-      debounce(e => {
+  const clickHandler = debounce(e => {
         const id = e?.target?.dataset?.id;
         if (id) {
           fetchDetails(id);
         }
-      }, 300),
-      [fetchDetails]
+      }, 300);
+
+  useEffect(() => {
+    window.addEventListener(
+      "click" as keyof DedicatedWorkerGlobalScopeEventMap,
+      clickHandler,
+      [fetchDetails] as AddEventListenerOptions
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,21 +62,14 @@ const ImagesSection = props => {
   ) : null;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: RootStateType) => ({
   images: state.images.images,
   subject: state.images.subject,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchImages: str => dispatch(fetchImages(str)),
-  fetchDetails: str => dispatch(fetchDetails(str)),
+const mapDispatchToProps = (dispatch:AppDispatch) => ({
+  fetchImages: (str:string) => dispatch(fetchImages(str)),
+  fetchDetails: (str:string) => dispatch(fetchDetails(str)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImagesSection);
-
-ImagesSection.propTypes = {
-  fetchImages: PropTypes.func,
-  fetchDetails: PropTypes.func,
-  images: PropTypes.array,
-  subject: PropTypes.string,
-};

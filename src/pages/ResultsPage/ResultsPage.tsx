@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import debounce from "lodash/debounce";
-import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-
 
 import MyModal from "./parts/Modal/Modal";
 import Form from "components/Form/Form";
@@ -13,36 +11,36 @@ import ImagesSection from "./parts/ImagesSection/ImagesSection";
 
 import { fetchDetails, fetchImages } from "reduxware/redux/thunks";
 import { withFormContainer } from "HOCs";
+import { AppDispatch } from "types";
 
 const WrappedForm = withFormContainer(Form);
 
-const ResultsPage = props => {
+interface Props {fetchImages:Function; fetchDetails:Function}
+const ResultsPage = (props:Props) => {
   const { fetchImages, fetchDetails } = props;
 
-  useEffect(() => {
-    window.addEventListener(
-      "click",
-      debounce(e => {
+const clickHandler = debounce(e => {
         const id = e?.target?.dataset?.image_hint;
         if (id) {
           fetchImages(id);
         }
-      }, 200),
-      [fetchImages]
+      }, 200)
+
+  useEffect(() => {
+    window.addEventListener(
+      "click" as keyof DedicatedWorkerGlobalScopeEventMap,
+      clickHandler,
+      [fetchImages] as AddEventListenerOptions
     );
 
     return () => {
       window.removeEventListener(
-        "click",
-        debounce(e => {
-          const id = e?.target?.dataset?.id;
-          if (id) {
-            fetchImages(id);
-          }
-        }, 300),
-        [fetchImages]
+        "click"as keyof DedicatedWorkerGlobalScopeEventMap,
+        clickHandler,
+        [fetchImages] as AddEventListenerOptions
       );
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchDetails, fetchImages]);
 
   return (
@@ -55,11 +53,9 @@ const ResultsPage = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchImages: str => dispatch(fetchImages(str)),
-  fetchDetails: str => dispatch(fetchDetails(str)),
+const mapDispatchToProps = (dispatch:AppDispatch) => ({
+  fetchImages: (str:string) => dispatch(fetchImages(str)),
+  fetchDetails: (str:string) => dispatch(fetchDetails(str)),
 });
 
 export default connect(null, mapDispatchToProps)(ResultsPage);
-
-ResultsPage.propTypes = { fetchImages: PropTypes.func, fetchDetails: PropTypes.func };

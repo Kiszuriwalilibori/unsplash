@@ -3,7 +3,7 @@ import * as React from "react";
 import { Alert, Snackbar } from "@mui/material";
 import { withStyles } from "@mui/styles";
 import { connect } from "react-redux";
-import { RootStateType } from "./AppProvider";
+import { RootStateType } from "types";
 import useDispatchAction from "hooks/useDispatchAction";
 
 const StyledAlert = withStyles({
