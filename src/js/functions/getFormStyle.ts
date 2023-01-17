@@ -1,9 +1,9 @@
-export const getFormStyle = (str: string, baseClass: string) => {
+export const getFormStyle = (str: boolean, baseClass: string) => {
   switch (str) {
-    case "/":
+    case true:
       return `${baseClass} form--search`;
 
-    case "/images":
+    case false:
       return `${baseClass} form--images`;
 
     default:
@@ -12,3 +12,19 @@ export const getFormStyle = (str: string, baseClass: string) => {
 };
 
 export default getFormStyle;
+
+
+// export const getFormStyle = (str: string, baseClass: string) => {
+//   switch (str) {
+//     case "/":
+//       return `${baseClass} form--search`;
+
+//     case "/images":
+//       return `${baseClass} form--images`;
+
+//     default:
+//       return `${baseClass} form--search`;
+//   }
+// };
+
+// export default getFormStyle;

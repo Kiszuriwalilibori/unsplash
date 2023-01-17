@@ -1,5 +1,5 @@
 import Unsplash, { toJson } from "unsplash-js";
-import { clearHints, getHints, hideHintsMsg } from "reduxware/redux/imagesReducer";
+import { clearHints, getHints, hideHintsMsg } from "reduxware/redux/hintsReducer";
 import {showError} from  "reduxware/redux";
 import { getTags, getOptions } from "js/functions";
 import { accessKey } from "js/fixtures";
@@ -16,14 +16,14 @@ export function fetchHints(pattern) {
             const errors = json.errors.join(", ");
             dispatch(showError(errors));
           } else {
-            dispatch(getHints(getOptions(getTags(json.results))));
+            dispatch(getHints(getTags(json.results)));
           }
         })
         .catch(err => {
           dispatch(showError(err.message));
         });
     } else {
-      if (getState().images.hints.length) {
+      if (getState().hints.hints.length) {
         dispatch(clearHints());
       }
       dispatch(hideHintsMsg())

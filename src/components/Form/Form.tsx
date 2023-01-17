@@ -1,7 +1,7 @@
 import * as React from "react";
 import debounce from "lodash/debounce";
 
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate} from "react-router";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -11,10 +11,11 @@ import NoHintsMessage from "./NoHintsMessage";
 import HintsSection from "./Hints/HintsSection";
 import SelectSection from "./SelectSection";
 
-import { clearHints } from "reduxware/redux/imagesReducer";
-import { RootStateType, AppDispatch, Hints } from "types";
+import { clearHints } from "reduxware/redux/hintsReducer";
+import { AppDispatch} from "types";
 import { fetchImages, fetchHints } from "reduxware/redux/thunks";
 import { getFormStyle } from "js/functions";
+import { useIsMainPage } from "hooks";
 
 function getHovered(node: HTMLElement | null) {
     if (!node) return null;
@@ -23,20 +24,17 @@ function getHovered(node: HTMLElement | null) {
     const arr = Array.from(elements);
     return arr[arr.length - 1];
 }
-
 interface Props  {
     fetchHints: Function;
     fetchImages: Function
-    clearHints: Function,
-    hints: Hints,
+
 };
 
 const Form = (props:Props) => {
-    const { fetchHints, hints, clearHints, fetchImages} = props;
-    const history = useNavigate();
-    const location = useLocation();
+    const { fetchHints, fetchImages} = props;
+    const navigate = useNavigate();
+    const isMainPage = useIsMainPage();
     //const refSelect = React.useRef();
-    const path = location.pathname;
     const foo = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         return false;
@@ -51,7 +49,7 @@ const Form = (props:Props) => {
                 const className = withHover.className;
                 if (className.includes("option")) {
                     fetchImages(withHover.textContent);
-                    history("./images");
+                    navigate("/images");
                 }
             }
         }
@@ -65,15 +63,11 @@ const Form = (props:Props) => {
         []
     );
 
-    React.useEffect(() => {
-        path === "/" && clearHints();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
     const { register, getValues, reset } = useForm();
 
     return (
         <div onKeyDown={debouncedGetImages}>
-            <form className={getFormStyle(path, "form")} onSubmit={foo}>
+            <form className={getFormStyle(isMainPage, "form")} onSubmit={foo}>
                 <BasicButton className="form__button" aria-label="Search">
                     <Icons.Search />
                 </BasicButton>
@@ -102,8 +96,8 @@ const Form = (props:Props) => {
                     <Icons.Reset />
                 </BasicButton>
             </form>
-            <SelectSection hints={hints} getValues={getValues} fetchImages={fetchImages} /*ref={refSelect}*/ />
-            <HintsSection hints={hints} />
+            <SelectSection getValues={getValues} fetchImages={fetchImages} /*ref={refSelect}*/ />
+            {!isMainPage && <HintsSection />}
             <NoHintsMessage />
         </div>
     );
@@ -111,20 +105,8 @@ const Form = (props:Props) => {
 
 const mapDispatchToProps = (dispatch:AppDispatch) => ({
     fetchHints: (str:string) => dispatch(fetchHints(str)),
-    clearHints: () => dispatch(clearHints()),
     fetchImages: (str:string) => dispatch(fetchImages(str)),
 });
 
-const mapStateToProps = (state:RootStateType) => ({
-    hints: state.images.hints,
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
-
-/**
- * todo hints powinno być z kontekstu jest czy nie ma bo inaczej mryga
- * */
-
-
-//export const getDraw = (state: { draw: { minifigs: Minifigs } }) => state.draw.minifigs;
-//export const getRunningStatus = (state: { running: { isRunning: boolean } }) => state.running.isRunning;
+export default connect(null, mapDispatchToProps)(Form);

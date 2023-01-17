@@ -7,11 +7,17 @@ import ErrorMessage from "components/ErrorMessage";
 import Form from "components/Form/Form";
 
 import { trending } from "js/fixtures";
-import {useCheckApiKey} from "hooks";
+import {useCheckApiKey, useDispatchAction} from "hooks";
 
 const SearchPage = () => {
 
   const isKeyAvailable = useCheckApiKey();
+  const {clearHints} = useDispatchAction();
+  
+    React.useEffect(() => {
+         clearHints();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
   return (
     <Container>
       <Header />
@@ -21,5 +27,8 @@ const SearchPage = () => {
     </Container>
   );
 };
+
+
+
 
 export default SearchPage;

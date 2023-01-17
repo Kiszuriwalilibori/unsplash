@@ -296,11 +296,14 @@ code {
 .images-hint {
   @extend .icon-button;
   min-width: 120px;
-  display: inline-flex;
+  display: inline-block;
   justify-content: center;
   align-content: center;
   margin: 0 4px 8px 4px;
   cursor: pointer;
+  &:first-letter {
+    text-transform: uppercase;
+}
 }
 
 .images-hints-wrapper {

@@ -2,14 +2,14 @@ import * as React from "react";
 import uuid from "react-uuid";
 
 import Hint from "./Hint";
-import { Hints } from "types";
 import { useLocation } from "react-router";
+import {getSortedHints} from "reduxware/redux/selectors";
+import { useSelector } from "react-redux";
 
-interface Props {
-    hints: Hints;
-}
-const HintsSection = (props: Props) => {
-    const { hints } = props;
+const HintsSection = () => {
+    
+    //const hints = useSelector(getAllHints, shallowEqual);
+    const hints = useSelector(getSortedHints);
     const path = useLocation().pathname;
     return hints?.length && path ? (
         <section className="images-hints-wrapper" id="images-hints-wrapper">

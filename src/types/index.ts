@@ -27,7 +27,7 @@ export interface Hint {
   value: string;
 }
 
-export type Hints = Hint[];
+export type Hints = string[];
 
 export { RootStateType, AppDispatch, GetState } from "components/AppProvider";
 
