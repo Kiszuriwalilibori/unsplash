@@ -10,13 +10,14 @@ import storage from "reduxjs-toolkit-persist/lib/storage";
 import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
 import imagesReducer from "../reduxware/redux/imagesReducer";
 import modalReducer from "../reduxware/redux/modalReducer";
+import errorReducer from "../reduxware/redux/errorReducer";
 
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const rootReducer = combineReducers({ images: imagesReducer, modal: modalReducer });
+const rootReducer = combineReducers({ images: imagesReducer, modal: modalReducer, error: errorReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

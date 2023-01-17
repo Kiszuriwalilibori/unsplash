@@ -1,7 +1,7 @@
 import Unsplash, { toJson } from "unsplash-js";
 import { accessKey } from "js/fixtures";
-import { showError, clearImages, getImages, setCollectionLength } from "../imagesReducer";
-import { initialState } from "../imagesReducer";
+import { clearImages, getImages, setCollectionLength, initialState } from "../imagesReducer";
+import { showError } from "reduxware/redux";
 
 export function fetchImages(pattern) {
   return (dispatch, getState) => {

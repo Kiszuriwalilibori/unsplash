@@ -4,7 +4,7 @@ import { Alert, Snackbar } from "@mui/material";
 import { withStyles } from "@mui/styles";
 import { connect } from "react-redux";
 import { RootStateType } from "types";
-import useDispatchAction from "hooks/useDispatchAction";
+import {useDispatchAction} from "hooks";
 
 const StyledAlert = withStyles({
   root: {
@@ -27,7 +27,7 @@ const Message = (props: Props) => {
   const { isOpen, message } = props;
   const { clearError } = useDispatchAction();
   return (
-    <Snackbar open={isOpen} autoHideDuration={5000} onClose={clearError}>
+    <Snackbar open={isOpen} autoHideDuration={5000} onClose={clearError}  anchorOrigin={{ vertical: 'bottom', horizontal:"center"}}>
       <StyledAlert severity="success" variant="filled">
         Ojejku, błąd:
         <br />
@@ -39,8 +39,8 @@ const Message = (props: Props) => {
 };
 
 const mapStateToProps = (state: RootStateType) => ({
-  isOpen: state.images.error.value,
-  message: state.images.error.code,
+  isOpen: state.error.value,
+  message: state.error.code,
 });
 
 const ErrorMessage = connect(mapStateToProps, {})(Message);

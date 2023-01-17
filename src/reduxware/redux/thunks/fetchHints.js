@@ -1,5 +1,6 @@
 import Unsplash, { toJson } from "unsplash-js";
-import { showError, clearHints, getHints, hideHintsMsg } from "reduxware/redux/imagesReducer";
+import { clearHints, getHints, hideHintsMsg } from "reduxware/redux/imagesReducer";
+import {showError} from  "reduxware/redux";
 import { getTags, getOptions } from "js/functions";
 import { accessKey } from "js/fixtures";
 

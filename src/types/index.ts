@@ -7,6 +7,7 @@ export interface Neighbours {
   previous: Previous;
   next: Next;
 }
+
 export interface Result {
   data: any;
   neighbours: Neighbours;

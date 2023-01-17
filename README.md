@@ -27,6 +27,18 @@ The following tools and resources has been used while developing Google Books
 - No suppport provided for Opera Mini
 - Not for IE
 
+
+### Steps to create copy for local use
+
+1. Fetch/clone content of master branch of repo https://github.com/Kiszuriwalilibori/unsplash to newly created directory
+2. Run npm install (not ready for yarn).
+3. Register as user and obtain your own api key from https://unsplash.com/
+4. In project main directory add .env file with the following content:
+REACT_APP_ACCESS_KEY ={your api key}
+
+5. Start app with npm run
+6. Enjoy app
+
 ### Version
 
 #### 1.0.0

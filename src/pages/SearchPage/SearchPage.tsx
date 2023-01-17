@@ -7,13 +7,16 @@ import ErrorMessage from "components/ErrorMessage";
 import Form from "components/Form/Form";
 
 import { trending } from "js/fixtures";
+import {useCheckApiKey} from "hooks";
 
 const SearchPage = () => {
+
+  const isKeyAvailable = useCheckApiKey();
   return (
     <Container>
       <Header />
-      <Form />
-      <Trending ary={trending} />
+      {isKeyAvailable && <Form />}
+      {isKeyAvailable && <Trending ary={trending} />}
       <ErrorMessage />
     </Container>
   );

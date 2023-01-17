@@ -1,10 +1,14 @@
 import Unsplash, { toJson } from "unsplash-js";
 import { accessKey } from "js/fixtures";
-import { showError } from "reduxware/redux/imagesReducer";
+import { showError } from "reduxware/redux";
 import { setBackground } from "js/functions";
 
 export function fetchBackgroundImage() {
   return dispatch => {
+    if(!accessKey.accessKey){
+       setBackground();
+       return;
+    }
     const unsplash = new Unsplash(accessKey);
     unsplash.photos
       .getRandomPhoto({ query: "nature", orientation: "landscape" })

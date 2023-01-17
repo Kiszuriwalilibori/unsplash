@@ -2,8 +2,7 @@ import Unsplash, { toJson } from "unsplash-js";
 
 import { createNeighbours } from "js/functions";
 import { accessKey } from "js/fixtures";
-import { showError } from "../imagesReducer";
-import { getDetails } from "reduxware/redux";
+import { getDetails, showError } from "reduxware/redux";
 
 export function fetchDetails(id) {
   return (dispatch, getState) => {

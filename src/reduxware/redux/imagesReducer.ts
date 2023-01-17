@@ -1,19 +1,15 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 import { Hints } from "types";
 import { extractData } from "js/functions";
-import { clearError } from "reduxware/redux";
-
 
 export const getImages = createAction("IMAGES_GET");
 export const getHints = createAction<Hints>("HINTS_GET");
 export const clearHints = createAction("HINTS_CLEAR");
-export const showError = createAction("ERROR_SHOW");
 export const chooseSubject = createAction("SUBJECT_CHOOSE");
 export const clearImages = createAction<string>("IMAGES_CLEAR");
 export const setCollectionLength = createAction("COLLECTION_LENGTH_SET");
 export const showHintsMsg = createAction("HINTS_MESSAGE_SHOW");
 export const hideHintsMsg = createAction("HINTS_MESSAGE_HIDE");
-//export const getBackgroundImage = createAction("GET_BACKGROUND_IMAGE");
 export const checkNeighbours = createAction("CURRENT_IMAGE_NEIGHBOURS_CHECK");
 
 export const initialState = {
@@ -77,10 +73,6 @@ const imagesReducer = createReducer(initialState, builder => {
       state.isHintsMessageVisible = false; /// ta linia jest zmieniona i to jest wątpliwe
     })
 
-    // .addCase(getBackgroundImage, (state, action) => {console.log('bgr image',action.payload);
-    //   state.backgroundImage = action.payload;
-    // })
-
     .addCase(hideHintsMsg, state => {
       state.isHintsMessageVisible = initialState.isHintsMessageVisible;
     })
@@ -93,17 +85,6 @@ const imagesReducer = createReducer(initialState, builder => {
       state.lastFetchedPage = initialState.lastFetchedPage;
       state.images = initialState.images;
       state.subject = action.payload;
-    })
-
-    .addCase(showError, (state, action) => {
-      if (action.payload) {
-        state.error.value = true;
-        state.error.code = action.payload;
-      }
-    })
-    .addCase(clearError, state => {
-      state.error.value = false;
-      state.error.code = "";
     })
 
     .addCase(chooseSubject, (state, action) => {
