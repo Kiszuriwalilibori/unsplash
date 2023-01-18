@@ -1,16 +1,43 @@
 import * as React from "react";
-import { Hint } from "types";
+import debounce from "lodash/debounce";
+import { connect } from "react-redux";
 
+
+import { AppDispatch } from "types";
+import { fetchImages } from "reduxware/redux/thunks";
 interface Props {
   hint: string;
+  fetchImages:Function;
 }
 
-const _Hint = (props: Props) => {
-  const { hint } = props;
-  return hint ? (
-    <div data-image_hint={hint} className="images-hint">
+const Hint = (props: Props) => {
+  const { hint, fetchImages } = props;
+
+const clickHandler = debounce(() => {  
+          fetchImages(hint);
+        }, 200);
+
+  if (!hint) return null;
+  return  (
+      <div className="images-hint" onClick = {clickHandler}>
       {hint}
     </div>
-  ) : null;
-};
-export default _Hint;
+  );
+  }
+
+const mapDispatchToProps = (dispatch:AppDispatch) => ({
+  fetchImages: (str:string) => dispatch(fetchImages(str)),
+  
+});
+
+export default connect(null, mapDispatchToProps)(Hint);
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ import { accessKey } from "js/fixtures";
 import { clearImages, getImages, setCollectionLength, initialState } from "../imagesReducer";
 import { showError } from "reduxware/redux";
 
-export function fetchImages(pattern) {
+export function fetchImages(pattern) { 
   return (dispatch, getState) => {
     const lastSubject = getState().images.subject;
     let lastFetchedPage, collectionLength;
