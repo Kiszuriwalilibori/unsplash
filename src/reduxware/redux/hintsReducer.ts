@@ -3,7 +3,6 @@ import { Hints, RootStateType } from "types";
 
 export const getHints = createAction<Hints>("HINTS_GET");
 export const clearHints = createAction("HINTS_CLEAR");
-export const showHintsMsg = createAction("HINTS_MESSAGE_SHOW");
 export const hideHintsMsg = createAction("HINTS_MESSAGE_HIDE");
 
 export const initialState = {
@@ -35,11 +34,6 @@ const hintsReducer = createReducer(initialState, builder => {
     .addCase(hideHintsMsg, state => {
       state.isHintsMessageVisible = initialState.isHintsMessageVisible;
     })
-
-    .addCase(showHintsMsg, state => {
-      state.isHintsMessageVisible = true;
-    })
-
     .addDefaultCase(() => {});
 });
 

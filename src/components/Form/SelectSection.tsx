@@ -1,10 +1,10 @@
 import * as React from "react";
 import Select from "react-select";
 
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { connect, useSelector } from "react-redux";
 
-import {getSortedPairs} from "reduxware/redux/selectors";
+import { getSortedPairs } from "reduxware/redux/selectors";
 import { AppDispatch } from "types";
 import { fetchHints } from "reduxware/redux/thunks";
 
@@ -14,15 +14,13 @@ interface Props {
 }
 
 const SelectSection = (props: Props) => {
-    const {getValues, fetchImages } = props;
+    const { getValues, fetchImages } = props;
     const hints = useSelector(getSortedPairs);
     const history = useNavigate();
-    const location = useLocation();
-    const path = location.pathname;
-    
+
     if (!hints.length) return null;
 
-    return path === "/" ? (
+    return (
         <Select
             className="select-top"
             id="Select-Section-Unsplash"
@@ -35,12 +33,10 @@ const SelectSection = (props: Props) => {
             }}
             options={hints}
         />
-    ) : null;
+    );
 };
 
-const mapDispatchToProps = (dispatch:AppDispatch) => ({
-    fetchHints: (str:string) => dispatch(fetchHints(str)),
-    
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    fetchHints: (str: string) => dispatch(fetchHints(str)),
 });
-export default  connect(null, mapDispatchToProps)(SelectSection);
-
+export default connect(null, mapDispatchToProps)(SelectSection);

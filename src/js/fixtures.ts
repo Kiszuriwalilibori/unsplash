@@ -9,5 +9,3 @@ export const fallbackBackground = {
     large: 'background: url(../images/background.jpg) no-repeat center center fixed',
 };
 
-//HjlzVyvVSsjd4F-NJ6IsI_DrtmEorpJd_oNwyPUtIBk  access key
-//Txe901QEbdj8M6STepiZyZyxBT7nC09KvDJuRr6QeRE  secret key

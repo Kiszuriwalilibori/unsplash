@@ -6,7 +6,18 @@ import ImageLocation from "./ImageLocation";
 import LocationContainer from "./LocationContainer";
 import ModalCloseButton from "./ModalCloseButton";
 import ModalFadeContainer from "./ModalFadeContainer";
-import ToNextImage from "./ToNextImageArrow";
-import ToPreviousImage from "./ToPreviousImageArrow";
+import ToNextImage from "./NextImage";
+import ToPreviousImage from "./PreviousImage";
 
-export { Image, AuthorDataContainer, AuthorNameTwitter, AuthorProfileImage, ImageLocation, LocationContainer, ModalCloseButton, ModalFadeContainer, ToNextImage, ToPreviousImage };
+export {
+    Image,
+    AuthorDataContainer,
+    AuthorNameTwitter,
+    AuthorProfileImage,
+    ImageLocation,
+    LocationContainer,
+    ModalCloseButton,
+    ModalFadeContainer,
+    ToNextImage,
+    ToPreviousImage,
+};

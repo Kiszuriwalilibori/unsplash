@@ -1,7 +1,7 @@
 import * as React from "react";
 import debounce from "lodash/debounce";
 
-import { useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -12,7 +12,7 @@ import HintsSection from "./Hints/HintsSection";
 import SelectSection from "./SelectSection";
 
 import { clearHints } from "reduxware/redux/hintsReducer";
-import { AppDispatch} from "types";
+import { AppDispatch } from "types";
 import { fetchImages, fetchHints } from "reduxware/redux/thunks";
 import { getFormStyle } from "js/functions";
 import { useIsMainPage } from "hooks";
@@ -24,27 +24,26 @@ function getHovered(node: HTMLElement | null) {
     const arr = Array.from(elements);
     return arr[arr.length - 1];
 }
-interface Props  {
+interface Props {
     fetchHints: Function;
-    fetchImages: Function
+    fetchImages: Function;
+}
 
-};
-
-const Form = (props:Props) => {
-    const { fetchHints, fetchImages} = props;
+const Form = (props: Props) => {
+    const { fetchHints, fetchImages } = props;
     const navigate = useNavigate();
     const isMainPage = useIsMainPage();
-    //const refSelect = React.useRef();
-    const foo = (e: { preventDefault: () => void; }) => {
+    const refSelect = React.useRef();
+    const foo = (e: { preventDefault: () => void }) => {
         e.preventDefault();
         return false;
     };
 
-    function getImages(e: { key: string; }) {
+    function getImages(e: { key: string }) {
         if (e.key === "Enter") {
-            const withHover = getHovered(document.getElementById("Select-Section-Unsplash"));
-            //const withHover = getHovered(refSelect.current);
-            
+            //const withHover = getHovered(document.getElementById("Select-Section-Unsplash"));
+            const withHover = getHovered(refSelect.current as any);
+
             if (withHover) {
                 const className = withHover.className;
                 if (className.includes("option")) {
@@ -85,7 +84,7 @@ const Form = (props:Props) => {
                 />
                 ;
                 <BasicButton
-                    isVisible={Boolean(getValues().pattern || "")}
+                    isVisible={true}
                     className="form__input-clear"
                     type="reset"
                     onClick={e => {
@@ -96,17 +95,16 @@ const Form = (props:Props) => {
                     <Icons.Reset />
                 </BasicButton>
             </form>
-            <SelectSection getValues={getValues} fetchImages={fetchImages} /*ref={refSelect}*/ />
+            {isMainPage && <SelectSection getValues={getValues} fetchImages={fetchImages} />}
             {!isMainPage && <HintsSection />}
             <NoHintsMessage />
         </div>
     );
 };
 
-const mapDispatchToProps = (dispatch:AppDispatch) => ({
-    fetchHints: (str:string) => dispatch(fetchHints(str)),
-    fetchImages: (str:string) => dispatch(fetchImages(str)),
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    fetchHints: (str: string) => dispatch(fetchHints(str)),
+    fetchImages: (str: string) => dispatch(fetchImages(str)),
 });
-
 
 export default connect(null, mapDispatchToProps)(Form);

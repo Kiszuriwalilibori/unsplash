@@ -1,75 +1,61 @@
-import React,{ useEffect, useCallback } from "react";
-import { connect } from "react-redux";
-
-import debounce from "lodash/debounce";
+import React, { useCallback, useRef } from "react";
 import handleViewport from "react-in-viewport";
 import uuid from "react-uuid";
+
+import { isEmpty, debounce } from "lodash";
+import { connect } from "react-redux";
 
 import Image from "../Image";
 import Subject from "./Subject";
 import Block from "./PageBottomControl";
-import ImagesContainer from "./ImagesContainer";
 
 import { fetchImages } from "reduxware/redux/thunks";
-import { fetchDetails } from "reduxware/redux/thunks";
 import { AppDispatch, RootStateType } from "types";
 
 const ViewportBlock = handleViewport(Block);
 
-interface Props{
-  images: any[];
-  fetchImages: Function;
-  fetchDetails: Function;
-  subject: string;
+interface Props {
+    images: any[];
+    fetchImages: Function;
+    subject: string;
 }
 
-const ImagesSection = (props:Props) => {
-  const { images, fetchDetails, fetchImages, subject } = props;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handleScrollBottom = useCallback(
-    debounce(() => {
-      fetchImages(subject);
-    }, 300),
-    [fetchImages, subject]
-  );
-
-  const clickHandler = debounce(e => {
-        const id = e?.target?.dataset?.id;
-        if (id) {
-          fetchDetails(id);
-        }
-      }, 300);
-
-  useEffect(() => {
-    window.addEventListener(
-      "click" as keyof DedicatedWorkerGlobalScopeEventMap,
-      clickHandler,
-      [fetchDetails] as AddEventListenerOptions
-    );
+const ImagesSection = (props: Props) => {
+    const { images, fetchImages, subject } = props;
+    const refContainer = useRef<HTMLDivElement>(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const handleScrollBottom = useCallback(
+        debounce(() => {
+            fetchImages(subject);
+        }, 300),
+        [fetchImages, subject]
+    );
+    if (!images || isEmpty(images)) return null;
 
-  return images && images.length ? (
-    <>
-      <Subject />
-      <ImagesContainer>
-        {images.map(item => (
-          <Image key={uuid()} prop={item} />
-        ))}
-        <ViewportBlock onEnterViewport={() => handleScrollBottom()} />
-      </ImagesContainer>
-    </>
-  ) : null;
+    return (
+        <>
+            <Subject />
+            <section className="fotos__wrapper" ref={refContainer}>
+                <div className="fotos__grid">
+                    <article className="fotos__container" id="fotos__container">
+                        {images.map(item => (
+                            <Image key={uuid()} prop={item} />
+                        ))}
+                        <ViewportBlock onEnterViewport={() => handleScrollBottom()} />
+                    </article>
+                </div>
+            </section>
+        </>
+    );
 };
 
 const mapStateToProps = (state: RootStateType) => ({
-  images: state.images.images,
-  subject: state.images.subject,
+    images: state.images.images,
+    subject: state.images.subject,
 });
 
-const mapDispatchToProps = (dispatch:AppDispatch) => ({
-  fetchImages: (str:string) => dispatch(fetchImages(str)),
-  fetchDetails: (str:string) => dispatch(fetchDetails(str)),
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    fetchImages: (str: string) => dispatch(fetchImages(str)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImagesSection);
