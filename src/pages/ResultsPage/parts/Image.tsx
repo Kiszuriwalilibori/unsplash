@@ -1,37 +1,32 @@
 import * as React from "react";
 
 import { debounce } from "lodash";
-import { connect } from "react-redux";
 
-import { fetchDetails } from "reduxware/redux/thunks";
-import { AppDispatch } from "types";
+import useDispatchAction from "hooks/useDispatchAction";
 interface Props {
-    prop: {
-        id: string;
-        urls: string;
-        description: string;
-        user: string;
-        tags: { title: string }[];
-    };
-    fetchDetails: Function;
+    id: string;
+    urls: string;
+    description: string;
+    user: string;
+    tags: { title: string }[];
 }
 
 const Image = (props: Props) => {
-    const { id, user, description, urls, tags } = props.prop;
-    const { fetchDetails } = props;
+    const { id, user, description, urls, tags } = props;
     const refTags = React.useRef<HTMLDivElement>(null);
+    const { setImageIdForModal, showModal } = useDispatchAction();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const showModal = React.useCallback(
+    const activateModal = React.useCallback(
         debounce(() => {
-            fetchDetails(id);
+            setImageIdForModal(id);
+            showModal();
         }, 100),
         [id]
     );
     return (
         <figure className="fotos__box visible fade-in" data-user={`Author: ${user}`} data-description={description}>
             <img
-                // data-id={id}
                 loading="lazy"
                 className="fotos__image"
                 alt={description}
@@ -41,7 +36,7 @@ const Image = (props: Props) => {
                 onLoad={() => {
                     refTags.current?.classList.add("active");
                 }}
-                onClick={showModal}
+                onClick={activateModal}
             ></img>
             <figcaption className="container-for-tags" ref={refTags}>
                 {tags.map((item, index) => (
@@ -54,8 +49,4 @@ const Image = (props: Props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    fetchDetails: (str: string) => dispatch(fetchDetails(str)),
-});
-
-export default connect(null, mapDispatchToProps)(Image);
+export default Image;

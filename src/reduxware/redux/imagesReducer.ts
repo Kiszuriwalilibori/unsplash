@@ -1,29 +1,29 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import { extractData } from "js/functions";
 
-export const getImages = createAction("IMAGES_GET");
+import { RootStateType } from "components/AppProvider";
+
+export const setImages = createAction("IMG_SET");
 export const chooseSubject = createAction("SUBJECT_CHOOSE");
 export const clearImages = createAction<string>("IMAGES_CLEAR");
 export const setCollectionLength = createAction("COLLECTION_LENGTH_SET");
 
 export const initialState = {
-    images: [],
     count: 0,
     lastFetchedPage: 0,
     subject: "",
     collectionLength: 0,
     backgroundImage: {},
-    currentNeighbours: {},
+    imgs: [],
 };
 
 const imagesReducer = createReducer(initialState, builder => {
     builder
 
-        .addCase(getImages, (state, action) => {
+        .addCase(setImages, (state, action) => {
             if (action.payload) {
-                let temp = [...state.images];
-                temp.push.apply(temp, extractData(action.payload));
-                state.images = temp;
+                let foo = [...state.imgs];
+                foo.push.apply(foo, action.payload);
+                state.imgs = foo;
                 state.lastFetchedPage++;
             }
         })
@@ -36,7 +36,7 @@ const imagesReducer = createReducer(initialState, builder => {
 
         .addCase(clearImages, (state, action) => {
             state.lastFetchedPage = initialState.lastFetchedPage;
-            state.images = initialState.images;
+            state.imgs = initialState.imgs;
             state.subject = action.payload;
         })
 
@@ -49,3 +49,5 @@ const imagesReducer = createReducer(initialState, builder => {
 });
 
 export default imagesReducer;
+
+export const getAllImages = (state: RootStateType) => state.images.imgs as any[];

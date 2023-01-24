@@ -2,7 +2,7 @@ import * as React from "react";
 import loadable from "@loadable/component";
 
 import "../styles/App.css";
-import Paths from "routes/paths";
+import Paths from "routes";
 import { Route, Routes } from "react-router-dom";
 
 const Results = loadable(() => import("pages/ResultsPage"));

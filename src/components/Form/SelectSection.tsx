@@ -4,7 +4,9 @@ import Select from "react-select";
 import { useNavigate } from "react-router";
 import { connect, useSelector } from "react-redux";
 
-import { getSortedPairs } from "reduxware/redux/selectors";
+import Paths from "routes";
+
+import { selectSelectOptions } from "reduxware/redux/selectors";
 import { AppDispatch } from "types";
 import { fetchHints } from "reduxware/redux/thunks";
 
@@ -15,10 +17,10 @@ interface Props {
 
 const SelectSection = (props: Props) => {
     const { getValues, fetchImages } = props;
-    const hints = useSelector(getSortedPairs);
-    const history = useNavigate();
+    const options = useSelector(selectSelectOptions);
+    const navigate = useNavigate();
 
-    if (!hints.length) return null;
+    if (!options.length) return null;
 
     return (
         <Select
@@ -29,9 +31,9 @@ const SelectSection = (props: Props) => {
             menuIsOpen={true}
             onChange={selectValue => {
                 fetchImages(selectValue.value);
-                history("./images");
+                navigate(Paths.images);
             }}
-            options={hints}
+            options={options}
         />
     );
 };

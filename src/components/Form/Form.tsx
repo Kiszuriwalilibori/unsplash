@@ -10,6 +10,7 @@ import Icons from "icons";
 import NoHintsMessage from "./NoHintsMessage";
 import HintsSection from "./Hints/HintsSection";
 import SelectSection from "./SelectSection";
+import Paths from "routes";
 
 import { clearHints } from "reduxware/redux/hintsReducer";
 import { AppDispatch } from "types";
@@ -48,7 +49,7 @@ const Form = (props: Props) => {
                 const className = withHover.className;
                 if (className.includes("option")) {
                     fetchImages(withHover.textContent);
-                    navigate("/images");
+                    navigate(Paths.images);
                 }
             }
         }

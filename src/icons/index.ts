@@ -6,7 +6,9 @@ import { ReactComponent as Info } from "icons/info.svg";
 import { ReactComponent as Share } from "icons/share.svg";
 import { ReactComponent as Like } from "icons/like.svg";
 import { ReactComponent as Location } from "icons/location.svg";
+import { ReactComponent as Previous } from "icons/previous.svg";
+import { ReactComponent as Next } from "icons/next.svg";
 
-const icons = { Reset, Search, Add, Close, Info, Like, Location, Share };
+const icons = { Reset, Search, Add, Close, Info, Like, Location, Share, Previous, Next };
 
 export default icons;

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { shallowEqual } from "react-redux";
+import { useSelector } from "react-redux";
 
 import HeaderIcons from "../HeaderIcons";
 import Icons from "icons";
@@ -18,18 +18,16 @@ import {
 } from "./parts";
 
 import { withDescription, WithButtonAndWrapperForIcon } from "HOCs";
-import { useTypedSelector } from "hooks/useTypedSelector";
+import { selectDataForModal } from "reduxware/redux/selectors";
 
 const ImageMagnified = () => {
-    const { previous, next, location, author, twitter, urls, profileImage } = useTypedSelector(
-        state => state.modal.details,
-        shallowEqual
-    );
+    const { location, author, twitter, urls, profileImage } = useSelector(selectDataForModal);
+
     if (!urls) return null;
     return (
         <ModalFadeContainer>
             <ModalCloseButton />
-            <ToPreviousImage previous={previous} />
+            <ToPreviousImage />
             <article className="modalbody">
                 <header className="modalbody__header">
                     <AuthorDataContainer>
@@ -60,7 +58,7 @@ const ImageMagnified = () => {
                     </WithButtonAndWrapperForIcon>
                 </footer>
             </article>
-            <ToNextImage next={next} />
+            <ToNextImage />
         </ModalFadeContainer>
     );
 };

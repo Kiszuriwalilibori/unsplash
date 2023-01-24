@@ -1,9 +1,8 @@
-import createNeighbours from "./createNeighbours";
-import extractData from "./extractData";
+import createImageData from "./createImageData";
 import getFormStyle from "./getFormStyle";
-import getOptions from "./getOptions";
+import createOptions from "./createOptions";
 import getTags from "./getTags";
 import setBackground from "./setBackground";
 import splitUrls from "./splitUrls";
 
-export { createNeighbours, extractData, getFormStyle, getOptions, getTags, setBackground, splitUrls };
+export { createImageData, getFormStyle, createOptions, getTags, setBackground, splitUrls };

@@ -1,37 +1,31 @@
 import * as React from "react";
 
 import { debounce } from "lodash";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { fetchDetails } from "reduxware/redux/thunks";
-import { AppDispatch } from "types";
+import useDispatchAction from "hooks/useDispatchAction";
+import Icons from "icons";
 
-interface Props {
-    next: string;
-    fetchDetails: Function;
-}
+import { selectNextModalId } from "reduxware/redux/selectors";
+import { Icon } from "@mui/material";
 
-const NextImage = (props: Props) => {
-    const { next, fetchDetails } = props;
+const NextImage = () => {
+    const nextId = useSelector(selectNextModalId);
+    const { setImageIdForModal } = useDispatchAction();
+
     const showModal = React.useCallback(
         debounce(() => {
-            fetchDetails(next);
+            setImageIdForModal(nextId);
         }, 100),
-        [next]
+        [nextId]
     );
     return (
         <aside className="modalbody__aside right" onClick={showModal}>
             <div className="modalbody__arrow-box">
-                <svg viewBox="0 0 32 32" className={next ? "modalbody__arrow-svg visible" : "modalbody__arrow-svg"}>
-                    <path d="M11.3333 7.3333l2-2L24 16 13.3333 26.6666l-2-2L20 16l-8.6667-8.6667z"></path>
-                </svg>
+                <Icons.Next className={nextId ? "modalbody__arrow-svg visible" : "modalbody__arrow-svg"} />
             </div>
         </aside>
     );
 };
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    fetchDetails: (str: string) => dispatch(fetchDetails(str)),
-});
-
-export default connect(null, mapDispatchToProps)(NextImage);
+export default NextImage;
