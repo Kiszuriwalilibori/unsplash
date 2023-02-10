@@ -3,16 +3,18 @@ import * as React from "react";
 import { debounce } from "lodash";
 
 import useDispatchAction from "hooks/useDispatchAction";
+//import { handleBreakpoints } from "@mui/system";
 interface Props {
     id: string;
     urls: string;
     description: string;
     user: string;
     tags: { title: string }[];
+    loadHandler?: Function;
 }
 
 const Image = (props: Props) => {
-    const { id, user, description, urls, tags } = props;
+    const { id, user, description, urls, tags, loadHandler } = props;
     const refTags = React.useRef<HTMLDivElement>(null);
     const { setImageIdForModal, showModal } = useDispatchAction();
 
@@ -27,7 +29,6 @@ const Image = (props: Props) => {
     return (
         <figure className="fotos__box visible fade-in" data-user={`Author: ${user}`} data-description={description}>
             <img
-                loading="lazy"
                 className="fotos__image"
                 alt={description}
                 sizes="(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw"
@@ -35,7 +36,9 @@ const Image = (props: Props) => {
                 itemProp="thumbnailUrl"
                 onLoad={() => {
                     refTags.current?.classList.add("active");
+                    loadHandler && loadHandler();
                 }}
+                onError={() => loadHandler && loadHandler()}
                 onClick={activateModal}
             ></img>
             <figcaption className="container-for-tags" ref={refTags}>

@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import handleViewport from "react-in-viewport";
 import uuid from "react-uuid";
 
-import { isEmpty, debounce } from "lodash";
+import { isEmpty, debounce, after } from "lodash";
 import { connect, useSelector } from "react-redux";
 
 import Image from "../Image";
@@ -25,6 +25,7 @@ const ImagesSection = (props: Props) => {
     const images = useSelector(selectAllImages) as any[];
 
     const refContainer = useRef<HTMLDivElement>(null);
+    const loadingRef = useRef<HTMLDivElement>(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScrollBottom = useCallback(
         debounce(() => {
@@ -33,16 +34,28 @@ const ImagesSection = (props: Props) => {
         [fetchImages, subject]
     );
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const loadHandler = useCallback(
+        after(images.length, () => {
+            refContainer.current?.classList.add("active");
+            loadingRef.current?.classList.remove("active");
+        }),
+        [images]
+    );
+
     if (!images || isEmpty(images)) return null;
 
     return (
         <>
             <Subject />
-            <section className="fotos__wrapper" ref={refContainer}>
+            <section className="fotos__wrapper">
+                <div className="fotos__loading active" ref={loadingRef}>
+                    Loading images
+                </div>
                 <div className="fotos__grid">
-                    <article className="fotos__container" id="fotos__container">
+                    <article className="fotos__container" id="fotos__container" ref={refContainer}>
                         {images.map(image => (
-                            <Image key={uuid()} {...image} />
+                            <Image key={uuid()} {...image} loadHandler={loadHandler} />
                         ))}
                         <ViewportBlock onEnterViewport={() => handleScrollBottom()} />
                     </article>
