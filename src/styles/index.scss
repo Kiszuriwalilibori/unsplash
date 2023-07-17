@@ -285,7 +285,7 @@ code {
     height: 26px;
     display: inline-block;
     color: #767676;
-    cursor: pointer;
+    // cursor: pointer; chwilowo, dopóki kliknięcie nie będzie działało na wybór
 
     &:hover {
         background-color: #e1e1e1;
