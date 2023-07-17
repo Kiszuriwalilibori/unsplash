@@ -285,10 +285,9 @@ code {
     height: 26px;
     display: inline-block;
     color: #767676;
-    // cursor: pointer; chwilowo, dopóki kliknięcie nie będzie działało na wybór
-
+    cursor: pointer;
     &:hover {
-        background-color: #e1e1e1;
+        background-color: $color-dark-2;
         color: $color-dark-1;
     }
 }

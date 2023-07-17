@@ -28,10 +28,11 @@ function getHovered(node: HTMLElement | null) {
 interface Props {
     fetchHints: Function;
     fetchImages: Function;
+    clearHints: Function;
 }
 
 const Form = (props: Props) => {
-    const { fetchHints, fetchImages } = props;
+    const { fetchHints, fetchImages, clearHints } = props;
     const navigate = useNavigate();
     const isMainPage = useIsMainPage();
     const refSelect = React.useRef();
@@ -106,6 +107,7 @@ const Form = (props: Props) => {
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
     fetchHints: (str: string) => dispatch(fetchHints(str)),
     fetchImages: (str: string) => dispatch(fetchImages(str)),
+    clearHints: () => dispatch(clearHints()),
 });
 
 export default connect(null, mapDispatchToProps)(Form);

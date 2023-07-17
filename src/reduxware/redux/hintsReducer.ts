@@ -6,40 +6,37 @@ export const clearHints = createAction("HINTS_CLEAR");
 export const hideHintsMsg = createAction("HINTS_MESSAGE_HIDE");
 
 export const initialState = {
- 
-  hints: [] as Hints,
-  isHintsMessageVisible: false,
-  
+    hints: [] as Hints,
+    isHintsMessageVisible: false,
 };
 
 const hintsReducer = createReducer(initialState, builder => {
-  builder
-    .addCase(getHints, (state, action) => {
-      if (action.payload) {
-        state.hints = action.payload;
-      }
+    builder
+        .addCase(getHints, (state, action) => {
+            if (action.payload) {
+                state.hints = action.payload;
+            }
 
-      if (action.payload && action.payload.length) {
-        state.isHintsMessageVisible = initialState.isHintsMessageVisible;
-      } else {
-        state.isHintsMessageVisible = true;
-      }
-    })
+            if (action.payload && action.payload.length) {
+                state.isHintsMessageVisible = initialState.isHintsMessageVisible;
+            } else {
+                state.isHintsMessageVisible = true;
+            }
+        })
 
-    .addCase(clearHints, state => {
-      state.hints = initialState.hints;
-      state.isHintsMessageVisible = false; 
-    })
+        .addCase(clearHints, state => {
+            state.hints = initialState.hints;
+            state.isHintsMessageVisible = false;
+        })
 
-    .addCase(hideHintsMsg, state => {
-      state.isHintsMessageVisible = initialState.isHintsMessageVisible;
-    })
-    .addDefaultCase(() => {});
+        .addCase(hideHintsMsg, state => {
+            state.isHintsMessageVisible = initialState.isHintsMessageVisible;
+        })
+        .addDefaultCase(() => {});
 });
 
 export default hintsReducer;
 
+export const isNoHintsFoundVisible = (state: RootStateType) => state.hints.isHintsMessageVisible;
 
-export const isNoHintsFoundVisible = (state: RootStateType)=>state.hints.isHintsMessageVisible;
-
-export const getAllHints = (state: RootStateType)=>state.hints.hints as Hints;
+export const getAllHints = (state: RootStateType) => state.hints.hints as Hints;

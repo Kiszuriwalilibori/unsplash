@@ -3,7 +3,10 @@ import * as React from "react";
 import { debounce } from "lodash";
 
 import useDispatchAction from "hooks/useDispatchAction";
-//import { handleBreakpoints } from "@mui/system";
+import { AppDispatch } from "types/index";
+import { fetchImages } from "reduxware/redux/thunks";
+import { connect } from "react-redux";
+
 interface Props {
     id: string;
     urls: string;
@@ -11,10 +14,11 @@ interface Props {
     user: string;
     tags: { title: string }[];
     loadHandler?: Function;
+    fetchImages: Function;
 }
 
 const Image = (props: Props) => {
-    const { id, user, description, urls, tags, loadHandler } = props;
+    const { id, user, description, urls, tags, loadHandler, fetchImages } = props;
     const refTags = React.useRef<HTMLDivElement>(null);
     const { setImageIdForModal, showModal } = useDispatchAction();
 
@@ -43,7 +47,14 @@ const Image = (props: Props) => {
             ></img>
             <figcaption className="container-for-tags" ref={refTags}>
                 {tags.map((item, index) => (
-                    <span className="fotos__tag" key={index} data-image_hint={item.title}>
+                    <span
+                        className="fotos__tag"
+                        key={index}
+                        data-image_hint={item.title}
+                        onClick={() => {
+                            fetchImages(item.title);
+                        }}
+                    >
                         {" " + item.title || ""}
                     </span>
                 ))}
@@ -52,4 +63,8 @@ const Image = (props: Props) => {
     );
 };
 
-export default Image;
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+    fetchImages: (str: string) => dispatch(fetchImages(str)),
+});
+export default connect(null, mapDispatchToProps)(Image);
+// export default Image;

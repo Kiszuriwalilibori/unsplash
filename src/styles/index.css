@@ -177,7 +177,7 @@ body {
 }
 
 .form--images {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   border-radius: 54px;
   width: 60%;
   margin: 0 auto;
@@ -525,6 +525,7 @@ code {
   height: 26px;
   display: inline-block;
   color: #767676;
+  cursor: pointer;
 }
 .fotos__tag:hover {
   background-color: #e1e1e1;
@@ -793,7 +794,7 @@ code {
 .noHints--short {
   width: 60%;
   margin: 12px auto;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 .images-hint {
