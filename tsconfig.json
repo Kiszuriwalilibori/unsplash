@@ -27,7 +27,8 @@
             "images/*": ["images/*"],
             "pages": ["pages/*"],
             "reduxware": ["reduxware/*"],
-            "icons/*": ["icons/*"]
+            "assets/*": ["assets/*"],
+            "icons/*": ["assets/icons/*"]
         }
     },
     "include": ["src"]

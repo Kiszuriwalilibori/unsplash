@@ -4,7 +4,7 @@ import { debounce } from "lodash";
 import { useSelector } from "react-redux";
 
 import useDispatchAction from "hooks/useDispatchAction";
-import Icons from "icons";
+import Icons from "assets/icons";
 
 import { selectPreviousModalId } from "reduxware/redux/selectors";
 
@@ -15,7 +15,7 @@ const PreviousImage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const showModal = React.useCallback(
         debounce(() => {
-            setImageIdForModal(Id);
+            Id && setImageIdForModal(Id);
         }, 100),
         [Id]
     );

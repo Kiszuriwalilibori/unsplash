@@ -10,19 +10,19 @@ import Subject from "./Subject";
 import Block from "./PageBottomControl";
 
 import { fetchImages } from "reduxware/redux/thunks";
-import { AppDispatch, RootStateType } from "types";
+import { AppDispatch, FetchImages, RootStateType } from "types";
 import { selectAllImages } from "reduxware/redux/selectors";
 
 const ViewportBlock = handleViewport(Block);
 
 interface Props {
-    fetchImages: Function;
+    fetchImages: FetchImages;
     subject: string;
 }
 
 const ImagesSection = (props: Props) => {
     const { fetchImages, subject } = props;
-    const images = useSelector(selectAllImages) as any[];
+    const images = useSelector(selectAllImages);
 
     const refContainer = useRef<HTMLDivElement>(null);
     const loadingRef = useRef<HTMLDivElement>(null);

@@ -3,11 +3,12 @@ import { clearHints, getHints, hideHintsMsg } from "reduxware/redux/hintsReducer
 import { showError } from "reduxware/redux";
 import { getTags } from "js/functions";
 import { accessKey } from "js/fixtures";
+import { AppDispatch, GetState } from "types";
 
-export function fetchHints(pattern) {
-    return (dispatch, getState) => {
+export function fetchHints(pattern: string) {
+    return (dispatch: AppDispatch, getState: GetState) => {
         if (pattern && pattern.length > 3) {
-            const unsplash = new Unsplash(accessKey);
+            const unsplash = new Unsplash(accessKey as { accessKey: string });
             unsplash.search
                 .photos(pattern, 1, 30)
                 .then(toJson)
@@ -30,3 +31,5 @@ export function fetchHints(pattern) {
         }
     };
 }
+
+export type FetchHints = (pattern: string) => void;

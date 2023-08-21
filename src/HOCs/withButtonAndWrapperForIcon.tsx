@@ -1,13 +1,18 @@
 import * as React from "react";
 
-function WithButtonAndWrapperForIcon(props: any) {
-  return (
-    <div className="icon-wrapper">
-      <button className="icon-button" aria-label={props.ariaLabel}>
-        {props.children}
-      </button>
-    </div>
-  );
+interface Props {
+    ariaLabel: string;
+    children: React.ReactNode;
+}
+function WithButtonAndWrapperForIcon(props: Props) {
+    const { ariaLabel, children } = props;
+    return (
+        <div className="icon-wrapper">
+            <button className="icon-button" aria-label={ariaLabel}>
+                {children}
+            </button>
+        </div>
+    );
 }
 export default WithButtonAndWrapperForIcon;
 

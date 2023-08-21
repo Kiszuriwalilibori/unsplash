@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "components/App";
 import reportWebVitals from "./reportWebVitals";
-import { register } from "../src/serviceWorkerRegistration";
+import { register } from "./serviceWorkerRegistration";
 import AppProvider from "components/AppProvider";
 
 ReactDOM.render(
-  <AppProvider>
-    <App />
-  </AppProvider>,
+    <AppProvider>
+        <App />
+    </AppProvider>,
 
-  document.getElementById("root")
+    document.getElementById("root")
 );
 
 reportWebVitals();

@@ -1,11 +1,11 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-import { RootStateType } from "components/AppProvider";
+import { RootStateType, Images } from "types";
 
-export const setImages = createAction("IMG_SET");
-export const chooseSubject = createAction("SUBJECT_CHOOSE");
+export const setImages = createAction<Images>("IMG_SET");
+export const chooseSubject = createAction<string>("SUBJECT_CHOOSE");
 export const clearImages = createAction<string>("IMAGES_CLEAR");
-export const setCollectionLength = createAction("COLLECTION_LENGTH_SET");
+export const setCollectionLength = createAction<number>("COLLECTION_LENGTH_SET");
 
 export const initialState = {
     count: 0,
@@ -13,7 +13,7 @@ export const initialState = {
     subject: "",
     collectionLength: 0,
     backgroundImage: {},
-    imgs: [],
+    imgs: [] as Images,
 };
 
 const imagesReducer = createReducer(initialState, builder => {
@@ -50,4 +50,4 @@ const imagesReducer = createReducer(initialState, builder => {
 
 export default imagesReducer;
 
-export const getAllImages = (state: RootStateType) => state.images.imgs as any[];
+export const getAllImages = (state: RootStateType) => state.images.imgs;

@@ -6,19 +6,19 @@ import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import BasicButton from "./BasicButton";
-import Icons from "icons";
+import Icons from "assets/icons";
 import NoHintsMessage from "./NoHintsMessage";
 import HintsSection from "./Hints/HintsSection";
 import SelectSection from "./SelectSection";
 import Paths from "routes";
 
 import { clearHints } from "reduxware/redux/hintsReducer";
-import { AppDispatch } from "types";
+import { AppDispatch, FetchHints, FetchImages } from "types";
 import { fetchImages, fetchHints } from "reduxware/redux/thunks";
 import { getFormStyle } from "js/functions";
 import { useIsMainPage } from "hooks";
 
-function getHovered(node: HTMLElement | null) {
+function getHovered(node: HTMLElement | undefined) {
     if (!node) return null;
     const elements = node.querySelectorAll(":hover");
     if (!elements) return null;
@@ -26,9 +26,9 @@ function getHovered(node: HTMLElement | null) {
     return arr[arr.length - 1];
 }
 interface Props {
-    fetchHints: Function;
-    fetchImages: Function;
-    clearHints: Function;
+    fetchHints: FetchHints;
+    fetchImages: FetchImages;
+    clearHints: () => void;
 }
 
 const Form = (props: Props) => {
@@ -44,12 +44,12 @@ const Form = (props: Props) => {
     function getImages(e: { key: string }) {
         if (e.key === "Enter") {
             //const withHover = getHovered(document.getElementById("Select-Section-Unsplash"));
-            const withHover = getHovered(refSelect.current as any);
+            const withHover = getHovered(refSelect.current);
 
             if (withHover) {
                 const className = withHover.className;
                 if (className.includes("option")) {
-                    fetchImages(withHover.textContent);
+                    withHover.textContent && fetchImages(withHover.textContent);
                     navigate(Paths.images);
                 }
             }

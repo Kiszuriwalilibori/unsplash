@@ -3,7 +3,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 
 import HeaderIcons from "../HeaderIcons";
-import Icons from "icons";
+import Icons from "assets/icons";
 
 import {
     Image,

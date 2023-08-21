@@ -1,6 +1,7 @@
 import { splitUrls } from "js/functions";
+import { ImageData } from "types";
 
-const createImageData = (ary: any[]) => {
+const createImageData = (ary: ImageData[]) => {
     let result = ary.map(item => ({
         id: item.id,
         urls: splitUrls(item.urls),

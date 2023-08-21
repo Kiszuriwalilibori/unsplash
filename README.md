@@ -58,3 +58,5 @@ This software is distributed under MIT license
 002 ref w form, do rozwiązania później
 003 są problemy z unsplash ts, konkretnie z inicjalizacja przez accesskey, prawdopodobnie stara wersja unsplasha stanowi problem.
 004 błąd przekroczenia limitu unsplasha rzuca komentarz niezwiązany z tematem
+
+możnaby napisać lepsze ts do thunków

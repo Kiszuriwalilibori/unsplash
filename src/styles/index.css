@@ -29,31 +29,31 @@ body {
 
 @media (max-width: 480px) {
   .root--fallback-background {
-    background: url(../images/background_mobile.jpg) no-repeat center center fixed;
+    background: url(../assets/images/background_mobile.jpg) no-repeat center center fixed;
     background-size: cover;
   }
 }
 @media (min-width: 481px) and (max-width: 759px) {
   .root--fallback-background {
-    background: url(../images/background_small.jpg) no-repeat center center fixed;
+    background: url(../assets/images/background_small.jpg) no-repeat center center fixed;
     background-size: cover;
   }
 }
 @media (min-width: 1601px) {
   .root--fallback-background {
-    background: url(../images/background.jpg) no-repeat center center fixed;
+    background: url(../assets/images/background.jpg) no-repeat center center fixed;
     background-size: cover;
   }
 }
 @media (min-width: 760px) and (max-width: 1024px) {
   .root--fallback-background {
-    background: url(../images/background_tablet.jpg) no-repeat center center fixed;
+    background: url(../assets/images/background_tablet.jpg) no-repeat center center fixed;
     background-size: cover;
   }
 }
 @media (min-width: 1025px) and (max-width: 1600px) {
   .root--fallback-background {
-    background: url(../images/background_desktop.jpg) no-repeat center center fixed;
+    background: url(../assets/images/background_desktop.jpg) no-repeat center center fixed;
     background-size: cover;
   }
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 
 import { useNavigate } from "react-router";
 import { connect, useSelector } from "react-redux";
@@ -7,12 +7,13 @@ import { connect, useSelector } from "react-redux";
 import Paths from "routes";
 
 import { selectSelectOptions } from "reduxware/redux/selectors";
-import { AppDispatch } from "types";
+import { AppDispatch, FetchImages } from "types";
 import { fetchHints } from "reduxware/redux/thunks";
+import { FieldValues, UseFormGetValues } from "react-hook-form";
 
 interface Props {
     getValues: any;
-    fetchImages: Function;
+    fetchImages: FetchImages;
 }
 
 const SelectSection = (props: Props) => {

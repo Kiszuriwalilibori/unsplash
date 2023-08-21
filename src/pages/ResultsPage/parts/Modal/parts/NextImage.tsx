@@ -4,10 +4,9 @@ import { debounce } from "lodash";
 import { useSelector } from "react-redux";
 
 import useDispatchAction from "hooks/useDispatchAction";
-import Icons from "icons";
+import Icons from "assets/icons";
 
 import { selectNextModalId } from "reduxware/redux/selectors";
-import { Icon } from "@mui/material";
 
 const NextImage = () => {
     const nextId = useSelector(selectNextModalId);
@@ -15,7 +14,7 @@ const NextImage = () => {
 
     const showModal = React.useCallback(
         debounce(() => {
-            setImageIdForModal(nextId);
+            nextId && setImageIdForModal(nextId);
         }, 100),
         [nextId]
     );

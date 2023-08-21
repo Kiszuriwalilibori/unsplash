@@ -2,11 +2,11 @@ import * as React from "react";
 import debounce from "lodash/debounce";
 import { connect } from "react-redux";
 
-import { AppDispatch } from "types";
+import { AppDispatch, FetchImages } from "types";
 import { fetchImages } from "reduxware/redux/thunks";
 interface Props {
     hint: string;
-    fetchImages: Function;
+    fetchImages: FetchImages;
 }
 
 const Hint = (props: Props) => {

@@ -3,7 +3,7 @@ import * as React from "react";
 import { debounce } from "lodash";
 
 import useDispatchAction from "hooks/useDispatchAction";
-import { AppDispatch } from "types/index";
+import { AppDispatch, FetchImages } from "types/index";
 import { fetchImages } from "reduxware/redux/thunks";
 import { connect } from "react-redux";
 
@@ -13,8 +13,8 @@ interface Props {
     description: string;
     user: string;
     tags: { title: string }[];
-    loadHandler?: Function;
-    fetchImages: Function;
+    loadHandler?: () => void;
+    fetchImages: FetchImages;
 }
 
 const Image = (props: Props) => {

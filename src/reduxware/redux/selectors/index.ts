@@ -4,6 +4,7 @@ import { createOptions, createImageData, splitUrls } from "js/functions";
 import { isNoHintsFoundVisible, getAllHints } from "../hintsReducer";
 import { getAllImages } from "../imagesReducer";
 import { getIdForModal } from "../modalReducer";
+import { ImageData, Images } from "types";
 
 const sortHints = (ary: string[]) => {
     const localeSort = Array.from(ary).sort((a, b) => {
@@ -12,27 +13,27 @@ const sortHints = (ary: string[]) => {
     return localeSort;
 };
 
-const createModalData = (images: any[], id: string) => {
+const createModalData = (images: ImageData[], id: string) => {
     const image = images.find(item => item.id === id);
 
     return {
-        location: image.location?.city
+        location: image?.location?.city
             ? image.location.city + ", " + (image.location.country ? image.location.country : "")
             : "",
-        author: image.user.name || image.user.last_name || image.user.first_name || "",
-        twitter: image.user.twitter_username || "",
-        profileImage: image.user.profile_image.small || "",
-        urls: image.urls ? splitUrls(image.urls) : "",
+        author: image?.user.name || image?.user.last_name || image?.user.first_name || "",
+        twitter: image?.user.twitter_username || "",
+        profileImage: image?.user.profile_image.small || "",
+        urls: image?.urls ? splitUrls(image.urls) : "",
     };
 };
 
-const createNextModalId = (ary: any[], id: string) => {
+const createNextModalId = (ary: Images, id: string | null) => {
     const index = ary.findIndex(item => item.id === id);
     const result = ary[index + 1] !== undefined ? ary[index + 1].id : null;
     return result;
 };
 
-const createPreviousModalId = (ary: any[], id: string) => {
+const createPreviousModalId = (ary: Images, id: string) => {
     const index = ary.findIndex(item => item.id === id);
     const result = ary[index + -1] !== undefined ? ary[index - 1].id : null;
     return result;
