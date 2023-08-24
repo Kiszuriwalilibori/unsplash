@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/unsplash/static/css/main.14bc070b.css",
-    "main.js": "/unsplash/static/js/main.51cd058d.js",
+    "main.js": "/unsplash/static/js/main.b592dbe1.js",
     "static/js/736.3fe80a09.chunk.js": "/unsplash/static/js/736.3fe80a09.chunk.js",
     "static/js/775.6a1f388d.chunk.js": "/unsplash/static/js/775.6a1f388d.chunk.js",
     "static/js/547.964114c7.chunk.js": "/unsplash/static/js/547.964114c7.chunk.js",
     "static/js/377.ad39976c.chunk.js": "/unsplash/static/js/377.ad39976c.chunk.js",
     "static/js/587.0626eb63.chunk.js": "/unsplash/static/js/587.0626eb63.chunk.js",
     "static/js/328.efc73a83.chunk.js": "/unsplash/static/js/328.efc73a83.chunk.js",
-    "static/js/814.7591e5d3.chunk.js": "/unsplash/static/js/814.7591e5d3.chunk.js",
+    "static/js/814.bf36f6b9.chunk.js": "/unsplash/static/js/814.bf36f6b9.chunk.js",
     "static/media/background.jpg": "/unsplash/static/media/background.c0aaf140e426dc57da6a.jpg",
     "static/media/background_desktop.jpg": "/unsplash/static/media/background_desktop.1eba2023672cb6675b7f.jpg",
     "static/media/background_tablet.jpg": "/unsplash/static/media/background_tablet.1871d4185d76d2805796.jpg",
@@ -27,17 +27,17 @@
     "static/media/next.svg": "/unsplash/static/media/next.19463580c53d48ae2299de52d46c0865.svg",
     "static/media/previous.svg": "/unsplash/static/media/previous.12b2be20b9e582946fb6ebb1b02199ef.svg",
     "main.14bc070b.css.map": "/unsplash/static/css/main.14bc070b.css.map",
-    "main.51cd058d.js.map": "/unsplash/static/js/main.51cd058d.js.map",
+    "main.b592dbe1.js.map": "/unsplash/static/js/main.b592dbe1.js.map",
     "736.3fe80a09.chunk.js.map": "/unsplash/static/js/736.3fe80a09.chunk.js.map",
     "775.6a1f388d.chunk.js.map": "/unsplash/static/js/775.6a1f388d.chunk.js.map",
     "547.964114c7.chunk.js.map": "/unsplash/static/js/547.964114c7.chunk.js.map",
     "377.ad39976c.chunk.js.map": "/unsplash/static/js/377.ad39976c.chunk.js.map",
     "587.0626eb63.chunk.js.map": "/unsplash/static/js/587.0626eb63.chunk.js.map",
     "328.efc73a83.chunk.js.map": "/unsplash/static/js/328.efc73a83.chunk.js.map",
-    "814.7591e5d3.chunk.js.map": "/unsplash/static/js/814.7591e5d3.chunk.js.map"
+    "814.bf36f6b9.chunk.js.map": "/unsplash/static/js/814.bf36f6b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.14bc070b.css",
-    "static/js/main.51cd058d.js"
+    "static/js/main.b592dbe1.js"
   ]
 }
