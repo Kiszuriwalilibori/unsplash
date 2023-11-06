@@ -19,10 +19,10 @@ const NextImage = () => {
         [nextId]
     );
     return (
-        <aside className="modalbody__aside right" onClick={showModal}>
-            <div className="modalbody__arrow-box">
-                <Icons.Next className={nextId ? "modalbody__arrow-svg visible" : "modalbody__arrow-svg"} />
-            </div>
+        <aside className="modal-content__aside right" onClick={showModal} aria-label="next image">
+            <button className="modal-content__arrow-button" disabled={!nextId}>
+                <Icons.Next className={nextId ? "modal-content__arrow-svg visible" : "modal-content__arrow-svg"} />
+            </button>
         </aside>
     );
 };

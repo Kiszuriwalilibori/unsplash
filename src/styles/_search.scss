@@ -1,110 +1,86 @@
-
 .search-text {
-    font-weight: 400;
-    font-size: 18px;
     color: white;
-    padding-left: 0;
-  }
-  
-.search-text--dark {
     font-weight: 400;
-    font-size: 18px;
-    color: $color-dark-1;
-    
-  }
-  
-
-.search-list-item{
-    list-style:none;
-    display:inline;
-    padding-left:6px;
-  }
-  .search-list{margin-top:$search-space; padding-left:0}
-  
-  
-
-
-.search-text--small{
-    font-size: 13px;
-    @include min480 { font-size: 15px;}
-    @include min768 { font-size: 18px;}
-  }
-  
-  
-  .search-text--smaller{
-    font-size: 13px;
-    @include min480 { font-size: 15px;}
-  }
-  
-  
-  
-  .search-text{
-    color:white;
-    font-weight:400px;
     line-height: 1.6;
-  }
-
-  
-
-
-  .search__header {
-    outline: none;
-    margin-bottom: 0;
-    margin-top:8px;
-    @include min768 { margin-top: 16px;}
-  }
-  
-
-
-
-
-
-
-
-  .search__motto {
-    @extend .search-text;
-    @extend .search-text--small;
-    
-    margin-bottom: $search-space;
-  }
-  
-  
-  
-  .search__license {
-    @extend .search-text;
-    @extend .search-text--small;
-    color: $color-license;
-    transition: color .1s ease-in-out, opacity .1s ease-in-out;
-    -webkit-text-decoration-skip: ink;
-    text-decoration-skip-ink: auto;
-    &:hover {
-      color: $color-search;
+    &--smaller {
+        font-size: 13px;
+        @include min480 {
+            font-size: 15px;
+        }
     }
-  }
-  
-  .search__unsplash {
-    box-sizing: border-box;
-    color: rgb(255, 255, 255);
-    font-weight: 700;
-    margin-bottom: 16px;
-    margin-top: 0px;
-    font-size: 28px;
-    line-height: 1.25;
-  
-    @include min768 {
-      font-size: 46px;
-      line-height: 1.2;
-  }
-  
-  }
-  
-  .search__background {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, .38) 0, rgba(0, 0, 0, .38) 3.5%, rgba(0, 0, 0, .379) 7%, rgba(0, 0, 0, .377) 10.35%, rgba(0, 0, 0, .375) 13.85%, rgba(0, 0, 0, .372) 17.35%, rgba(0, 0, 0, .369) 20.85%, rgba(0, 0, 0, .366) 24.35%, rgba(0, 0, 0, .364) 27.85%, rgba(0, 0, 0, .361) 31.35%, rgba(0, 0, 0, .358) 34.85%, rgba(0, 0, 0, .355) 38.35%, rgba(0, 0, 0, .353) 41.85%, rgba(0, 0, 0, .351) 45.35%, rgba(0, 0, 0, .35) 48.85%, rgba(0, 0, 0, .353) 52.35%, rgba(0, 0, 0, .36) 55.85%, rgba(0, 0, 0, .371) 59.35%, rgba(0, 0, 0, .385) 62.85%, rgba(0, 0, 0, .402) 66.35%, rgba(0, 0, 0, .42) 69.85%, rgba(0, 0, 0, .44) 73.35%, rgba(0, 0, 0, .46) 76.85%, rgba(0, 0, 0, .48) 80.35%, rgba(0, 0, 0, .498) 83.85%, rgba(0, 0, 0, .515) 87.35%, rgba(0, 0, 0, .529) 90.85%, rgba(0, 0, 0, .54) 94.35%, rgba(0, 0, 0, .547) 97.85%, rgba(0, 0, 0, .55));
-  }
-  
-  
+    &--small {
+        font-size: 13px;
+        @include min480 {
+            font-size: 15px;
+        }
+        @include min768 {
+            font-size: 18px;
+        }
+    }
+    &--dark {
+        font-weight: 400;
+        font-size: 18px;
+        color: $color-dark-1;
+    }
+}
 
+.search {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 144px;
+    padding-bottom: 152px;
+    max-width: 1320px;
+    width: 90%;
+    @include min480 {
+        width: 480px;
+    }
+    @include min768 {
+        width: 66.66667%;
+    }
+    @media only screen and (max-width: 480px) {
+        padding-top: 80px;
+        padding-bottom: 64px;
+    }
+    &__header {
+        &--main {
+            box-sizing: border-box;
+            font-weight: 700;
+            margin-bottom: 16px;
+            margin-top: 0px;
+            font-size: 28px;
+            line-height: 1.25;
+            color: white;
+            @include min768 {
+                font-size: 46px;
+                line-height: 1.2;
+            }
+        }
+        &--secondary {
+            outline: none;
+            margin-bottom: 0;
+            margin-top: 8px;
+            @extend .search-text;
+            @extend .search-text--small;
+            @include min768 {
+                margin-top: 16px;
+            }
+        }
+    }
+
+    &__motto {
+        @extend .search-text;
+        @extend .search-text--small;
+        margin-bottom: $search-space;
+    }
+    &__license {
+        @extend .search-text;
+        @extend .search-text--small;
+        color: $color-license;
+        transition: color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+        -webkit-text-decoration-skip: ink;
+        text-decoration-skip-ink: auto;
+        &:hover {
+            color: $color-search;
+        }
+    }
+}

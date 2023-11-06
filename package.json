@@ -13,11 +13,13 @@
         "@testing-library/jest-dom": "^5.11.5",
         "@testing-library/react": "^11.1.1",
         "@testing-library/user-event": "^12.2.0",
+        "focus-trap-react": "^10.2.3",
         "lodash": "^4.17.20",
+        "notistack": "^3.0.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-hook-form": "^7.19.5",
-        "react-in-viewport": "^1.0.0-alpha.28",
+        "react-in-viewport": "^1.0.0-alpha.30",
         "react-redux": "^7.2.1",
         "react-router-dom": "^6.6.1",
         "react-scripts": "^5.0.0",
@@ -47,8 +49,7 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d build",
-        "webp": "simple-webp-converter"
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": [

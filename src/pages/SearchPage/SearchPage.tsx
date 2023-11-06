@@ -1,34 +1,45 @@
 import * as React from "react";
 
-import Trending from "./parts/Trending";
-import Header from "./parts/Header";
-import Container from "./parts/SearchPage_Container";
-import ErrorMessage from "components/ErrorMessage";
-import Form from "components/Form/Form";
+import { connect } from "react-redux";
 
+import { Header, Trending } from "./parts";
+import { ErrorMessage, Form, InitialScreen } from "components";
 import { trending } from "js/fixtures";
-import {useCheckApiKey, useDispatchAction} from "hooks";
+import { useCheckApiKey, useDispatchAction } from "hooks";
+import { RootState } from "components/AppProvider";
+import Stack from "@mui/material/Stack";
 
-const SearchPage = () => {
+interface Props {
+    isWithTemporaryBackground: boolean;
+}
 
-  const isKeyAvailable = useCheckApiKey();
-  const {clearHints} = useDispatchAction();
-  
+const SearchPage = (props: Props) => {
+    const { isWithTemporaryBackground } = props;
+    const isKeyAvailable = useCheckApiKey();
+    const { clearHints } = useDispatchAction();
+
     React.useEffect(() => {
-         clearHints();
+        clearHints();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-  return (
-    <Container>
-      <Header />
-      {isKeyAvailable && <Form />}
-      {isKeyAvailable && <Trending ary={trending} />}
-      <ErrorMessage />
-    </Container>
-  );
+
+    if (isWithTemporaryBackground) return <InitialScreen />;
+    return (
+        <div className="search">
+            <Header />
+            {isKeyAvailable && (
+                <Stack spacing={3}>
+                    <Form />
+                    <Trending ary={trending} />
+                </Stack>
+            )}
+            <ErrorMessage />
+        </div>
+    );
 };
 
+const mapStateToProps = (state: RootState) => ({
+    isWithTemporaryBackground: state.temporaryBackground.isVisible,
+});
 
-
-
-export default SearchPage;
+export default connect(mapStateToProps, {})(SearchPage);

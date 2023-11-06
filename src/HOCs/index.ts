@@ -1,6 +1,4 @@
 import renderWhenIsVisible from "./renderWhenIsVisible";
-import WithButtonAndWrapperForIcon from "./withButtonAndWrapperForIcon";
-import withDescription from "./withDescription";
-import withFormContainer from "./withFormContainer";
+import WithRandomBackground from "./withRandomBackground";
 
-export { renderWhenIsVisible, WithButtonAndWrapperForIcon, withDescription, withFormContainer };
+export { renderWhenIsVisible, WithRandomBackground };

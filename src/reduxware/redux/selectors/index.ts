@@ -1,10 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { createOptions, createImageData, splitUrls } from "js/functions";
+import { createOptions, createImageData, createUrls } from "js/functions";
 
-import { isNoHintsFoundVisible, getAllHints } from "../hintsReducer";
-import { getAllImages } from "../imagesReducer";
-import { getIdForModal } from "../modalReducer";
+import { isNoHintsFoundVisible, getAllHints } from "../../reducers/hintsReducer";
+import { getAllImages } from "../../reducers/imagesReducer";
+import { getIdForModal } from "../../reducers/modalReducer";
 import { ImageData, Images } from "types";
+import { selectIsOnline } from "reduxware/reducers/onlineReducer";
 
 const sortHints = (ary: string[]) => {
     const localeSort = Array.from(ary).sort((a, b) => {
@@ -15,15 +16,16 @@ const sortHints = (ary: string[]) => {
 
 const createModalData = (images: ImageData[], id: string) => {
     const image = images.find(item => item.id === id);
-
     return {
         location: image?.location?.city
             ? image.location.city + ", " + (image.location.country ? image.location.country : "")
+            : image?.user?.location
+            ? image?.user?.location
             : "",
         author: image?.user.name || image?.user.last_name || image?.user.first_name || "",
         twitter: image?.user.twitter_username || "",
         profileImage: image?.user.profile_image.small || "",
-        urls: image?.urls ? splitUrls(image.urls) : "",
+        urls: image?.urls ? createUrls(image.urls) : "",
     };
 };
 
@@ -53,9 +55,10 @@ const selectPreviousModalId = createSelector(getAllImages, getIdForModal, create
 export {
     selectSelectOptions,
     selectSortedHints,
-    isNoHintsFoundVisible,
     selectAllImages,
     selectDataForModal,
     selectNextModalId,
     selectPreviousModalId,
+    isNoHintsFoundVisible,
+    selectIsOnline,
 };

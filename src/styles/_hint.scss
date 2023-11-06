@@ -1,0 +1,10 @@
+.hint {
+    @extend .modal-content__button;
+    min-width: 120px;
+    display: inline-block;
+    margin: 0 8px 8px 0;
+    cursor: pointer;
+    &:first-letter {
+        text-transform: uppercase;
+    }
+}

@@ -1,27 +1,41 @@
 import Unsplash, { toJson } from "unsplash-js";
-import { clearHints, getHints, hideHintsMsg } from "reduxware/redux/hintsReducer";
-import { showError } from "reduxware/redux";
-import { getTags } from "js/functions";
-import { accessKey } from "js/fixtures";
-import { AppDispatch, GetState } from "types";
 
-export function fetchHints(pattern: string) {
+import { clearHints, getHints, hideHintsMsg, showError } from "reduxware/redux";
+import { ThunkAction } from "@reduxjs/toolkit";
+import { AnyAction } from "redux";
+
+import { createTags } from "js/functions";
+import { ACCESS_KEY, INPUT_LENGTH_THRESHOLD, NUMBER_OF_HINTS } from "js/fixtures";
+import { AppDispatch, GetState, RootState } from "types";
+
+export function fetchHints(pattern: string): ThunkAction<void, RootState, undefined, AnyAction> {
     return (dispatch: AppDispatch, getState: GetState) => {
-        if (pattern && pattern.length > 3) {
-            const unsplash = new Unsplash(accessKey as { accessKey: string });
+        if (pattern && pattern.length > INPUT_LENGTH_THRESHOLD) {
+            const unsplash = new Unsplash(ACCESS_KEY as { accessKey: string });
             unsplash.search
-                .photos(pattern, 1, 30)
+                .photos(pattern, 1, NUMBER_OF_HINTS)
                 .then(toJson)
                 .then(json => {
-                    if (json.errors) {
-                        const errors = json.errors.join(", ");
+                    if (json.errors || json?.OK === false) {
+                        const errors = json.errors
+                            ? json.errors.join(", ")
+                            : json.statusText
+                            ? json.statusText
+                            : "Unknown error during fetching images";
+
                         dispatch(showError(errors));
                     } else {
-                        dispatch(getHints(getTags(json.results)));
+                        dispatch(getHints(createTags(json.results)));
                     }
                 })
                 .catch(err => {
-                    dispatch(showError(err.message));
+                    let message: string;
+                    if (err instanceof Error) {
+                        message = err.message;
+                    } else {
+                        message = "Unknown error occured when fetching hints";
+                    }
+                    dispatch(showError(message));
                 });
         } else {
             if (getState().hints.hints.length) {

@@ -1,0 +1,34 @@
+.trending {
+    padding-left: 0;
+    @extend .search-text;
+    @extend .search-text--smaller;
+    &__list {
+        list-style: none;
+        padding-left: 0;
+        display: inline;
+    }
+    &__item {
+        display: inline;
+        padding-left: 6px;
+        cursor: pointer;
+        color: $color-license;
+        &:hover {
+            color: white;
+        }
+        &:focus {
+            color: white;
+        }
+        &--with-preceding-comma {
+            position: relative;
+            display: inline;
+            padding-left: 8px;
+            &::before {
+                content: ", ";
+                width: 2px;
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+            }
+        }
+    }
+}

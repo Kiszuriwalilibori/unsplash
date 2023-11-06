@@ -1,10 +1,11 @@
 import React from "react";
-import { HashRouter as Router } from "react-router-dom";
-import SetBackground from "./SetBackground";
 import thunk from "redux-thunk";
+import storage from "reduxjs-toolkit-persist/lib/storage";
+
+import { HashRouter as Router } from "react-router-dom";
+import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
 import { Provider } from "react-redux";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-
 import {
     persistStore,
     persistReducer,
@@ -15,12 +16,18 @@ import {
     PURGE,
     REGISTER,
 } from "reduxjs-toolkit-persist";
-import storage from "reduxjs-toolkit-persist/lib/storage";
-import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
-import imagesReducer from "../reduxware/redux/imagesReducer";
-import modalReducer from "../reduxware/redux/modalReducer";
-import errorReducer from "../reduxware/redux/errorReducer";
-import hintsReducer from "../reduxware/redux/hintsReducer";
+
+import {
+    errorReducer,
+    hintsReducer,
+    imagesReducer,
+    modalReducer,
+    onlineReducer,
+    temporaryBackgroundReducer,
+} from "reduxware/reducers";
+
+import { WithRandomBackground } from "hocs";
+import { SnackbarProvider } from "notistack";
 
 const persistConfig = {
     key: "root",
@@ -33,9 +40,11 @@ const rootReducer = combineReducers({
     modal: modalReducer,
     error: errorReducer,
     hints: hintsReducer,
+    temporaryBackground: temporaryBackgroundReducer,
+    online: onlineReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer) as typeof rootReducer;
 
 export const store = configureStore({
     reducer: persistedReducer,
@@ -54,7 +63,15 @@ const AppProvider: React.FC = ({ children }) => {
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router>
-                    <SetBackground>{children}</SetBackground>
+                    <SnackbarProvider
+                        maxSnack={3}
+                        anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "center",
+                        }}
+                    >
+                        <WithRandomBackground>{children}</WithRandomBackground>
+                    </SnackbarProvider>
                 </Router>
             </PersistGate>
         </Provider>
@@ -62,6 +79,6 @@ const AppProvider: React.FC = ({ children }) => {
 };
 
 export default AppProvider;
-export type RootStateType = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type GetState = typeof store.getState;

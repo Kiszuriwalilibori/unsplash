@@ -1,0 +1,15 @@
+.no-hints-message {
+    height: $form-height;
+    border-radius: $form-height;
+    background-color: $form-background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6px;
+    &--short {
+        @extend .no-hints-message;
+        width: 60%;
+        margin: 12px auto;
+        background-color: $form-images-color;
+    }
+}

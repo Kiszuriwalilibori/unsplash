@@ -1,16 +1,21 @@
 import Unsplash, { toJson } from "unsplash-js";
-import { accessKey } from "js/fixtures";
-import { clearImages, setImages, setCollectionLength, initialState } from "../imagesReducer";
-import { showError } from "reduxware/redux";
-import { AppDispatch, GetState } from "types";
 
-export function fetchImages(pattern: string) {
+import { ACCESS_KEY, NUMBER_OF_IMAGES } from "js/fixtures";
+import { clearImages, setImages, setCollectionLength, initialState } from "../../reducers/imagesReducer";
+import { showError } from "reduxware/redux";
+import { AppDispatch, GetState, RootState, ShowMessage } from "types";
+import { ThunkAction } from "@reduxjs/toolkit";
+import { AnyAction } from "redux";
+
+export function fetchImages(
+    pattern: string,
+    showMessage: ShowMessage
+): ThunkAction<void, RootState, undefined, AnyAction> {
     return (dispatch: AppDispatch, getState: GetState) => {
         if (pattern) {
             const lastSubject = getState().images.subject;
             let lastFetchedPage, collectionLength;
             let shouldFetch = false;
-
             if (lastSubject === pattern) {
                 collectionLength = getState().images.collectionLength;
                 lastFetchedPage = getState().images.lastFetchedPage;
@@ -18,7 +23,7 @@ export function fetchImages(pattern: string) {
                     shouldFetch = true;
                 } else {
                     shouldFetch = false;
-                    dispatch(showError("Nie ma więcej zdjęć w danej kategorii - nie próbuj ich pobrać"));
+                    showMessage.warning("Nie ma więcej zdjęć w danej kategorii - nie próbuj ich pobrać");
                 }
             } else {
                 dispatch(clearImages(pattern));
@@ -26,26 +31,37 @@ export function fetchImages(pattern: string) {
                 shouldFetch = true;
             }
             if (shouldFetch) {
-                const unsplash = new Unsplash(accessKey as { accessKey: string });
-
+                const unsplash = new Unsplash(ACCESS_KEY as { accessKey: string });
                 unsplash.search
-                    .photos(pattern, lastFetchedPage + 1, 30)
+                    .photos(pattern, lastFetchedPage + 1, NUMBER_OF_IMAGES)
                     .then(toJson)
                     .then(json => {
-                        if (json.errors) {
-                            const errors = json.errors.join(", ");
+                        if (json.errors || json?.OK === false) {
+                            const errors = json.errors
+                                ? json.errors.join(", ")
+                                : json.statusText
+                                ? json.statusText
+                                : "Unknown error during fetching images";
+
                             dispatch(showError(errors));
+                            return;
                         } else {
                             dispatch(setImages(json.results));
                             dispatch(setCollectionLength(json.total_pages));
                         }
                     })
                     .catch(err => {
-                        dispatch(showError(err.message));
+                        let message: string;
+                        if (err instanceof Error) {
+                            message = err.message;
+                        } else {
+                            message = "Unknown error occured when fetching images";
+                        }
+                        dispatch(showError(message));
                     });
             }
         }
     };
 }
 
-export type FetchImages = (pattern: string) => void;
+export type FetchImages = (pattern: string, showMessage: ShowMessage) => void;

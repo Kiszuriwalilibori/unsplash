@@ -1,9 +1,9 @@
 import { PathKeys } from "types";
 
-export const Paths: { [key in PathKeys]: string } = {
-    select: "/",
-    images: "/images",
-    nopage: "*",
+export const PATHS: { [key in PathKeys]: string } = {
+    SEARCH: "/",
+    RESULTS: "/images",
+    NOPAGE: "*",
 };
 
-export default Paths;
+export default PATHS;

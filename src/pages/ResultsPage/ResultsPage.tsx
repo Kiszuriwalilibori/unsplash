@@ -1,26 +1,24 @@
-import React  from "react";
+import React from "react";
 
-import MyModal from "./parts/Modal/Modal";
-import Form from "components/Form/Form";
-import Container from "./parts/ResultsPageContainer";
-import ErrorMessage from "components/ErrorMessage";
-import ImagesSection from "./parts/ImagesSection/ImagesSection";
+import MyModal from "./parts/Modal";
+import Images from "./parts/Images";
 
-import { withFormContainer } from "HOCs";
-
-
-const WrappedForm = withFormContainer(Form);
+import { ResultsPageContainer, ResultsPageFormContainer } from "./styled";
+import { ErrorMessage, Form } from "components";
+import { useClearOnMount } from "hooks";
 
 const ResultsPage = () => {
-  
-  return (
-    <Container>
-      <ErrorMessage />
-      <WrappedForm />
-      <MyModal />
-      <ImagesSection />
-    </Container>
-  );
+    useClearOnMount();
+    return (
+        <ResultsPageContainer>
+            <ErrorMessage />
+            <ResultsPageFormContainer>
+                <Form />
+            </ResultsPageFormContainer>
+            <MyModal />
+            <Images />
+        </ResultsPageContainer>
+    );
 };
 
 export default ResultsPage;
