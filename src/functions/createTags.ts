@@ -1,6 +1,6 @@
-import { ImageData } from "types";
+import { Images } from "types";
 
-export const createTags = (ary: ImageData[]) => [
+export const createTags = (ary: Images) => [
     ...new Set(
         ary
             .map(item => item.tags)

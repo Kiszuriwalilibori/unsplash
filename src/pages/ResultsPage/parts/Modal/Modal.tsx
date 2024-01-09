@@ -1,10 +1,10 @@
 import * as React from "react";
 import Modal from "@mui/material/Modal";
 
-import { connect } from "react-redux";
-
-import { RootState } from "types";
 import ModalContent from "./ModalContent";
+
+import { connect } from "react-redux";
+import { RootState } from "types";
 
 interface Props {
     isModalVisible: boolean;

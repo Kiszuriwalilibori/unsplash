@@ -40,7 +40,7 @@ const Image = (props: Props) => {
             <ImageContainer data-user={`Author: ${user}`} data-description={description} onClick={clickHandler}>
                 <img
                     className="image"
-                    alt={description || "Image description"}
+                    alt={description || "An image"}
                     sizes="(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw"
                     srcSet={urls}
                     itemProp="thumbnailUrl"

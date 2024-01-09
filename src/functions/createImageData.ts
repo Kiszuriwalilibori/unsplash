@@ -1,7 +1,7 @@
 import { createUrls } from "functions";
-import { ImageData } from "types";
+import { Images } from "types";
 
-const createImageData = (ary: ImageData[]) => {
+const createImageData = (ary: Images) => {
     let result = ary.map(item => ({
         id: item.id,
         urls: createUrls(item.urls),
