@@ -8,6 +8,7 @@ import { AppDispatch, FetchImages } from "types";
 import { fetchImages } from "reduxware/redux/thunks";
 import { selectIsOnline } from "reduxware/redux/selectors";
 import useMessage, { ShowMessage } from "hooks/useMessage";
+import { DEBOUNCE_DELAY } from "config";
 
 interface Props {
     hint: string;
@@ -23,7 +24,7 @@ const Hint = (props: Props) => {
     const handleClick = useCallback(
         debounce(() => {
             fetchImages(hint, showMessage);
-        }, 200),
+        }, DEBOUNCE_DELAY),
         [hint]
     );
 

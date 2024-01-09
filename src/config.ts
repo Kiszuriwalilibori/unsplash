@@ -12,5 +12,6 @@ export const fallbackBackground = {
 export const NUMBER_OF_HINTS = 30;
 export const NUMBER_OF_IMAGES = 30;
 export const INPUT_LENGTH_THRESHOLD = 3;
+export const DEBOUNCE_DELAY = 200;
 
 export const RANDOM_BACKGROUND_QUERY = { query: "nature,green", orientation: "landscape" };

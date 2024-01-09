@@ -46,5 +46,14 @@ export interface Hint {
 export type Hints = string[];
 export type Images = ImageData[];
 
+interface ImagesState {
+    count: number;
+    lastFetchedPage: number;
+    subject: string;
+    collectionLength: number;
+    backgroundImage: Object;
+    imgs: Images;
+}
+
 export { RootState, AppDispatch, GetState } from "components/AppProvider";
-export { ErrorState, FetchHints, FetchImages, HintsState, ModalState, PathKeys, ShowMessage };
+export { ErrorState, FetchHints, FetchImages, HintsState, ImagesState, ModalState, PathKeys, ShowMessage };

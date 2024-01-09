@@ -7,6 +7,7 @@ import useDispatchAction from "hooks/useDispatchAction";
 import Icons from "assets/icons";
 
 import { selectNextModalId } from "reduxware/redux/selectors";
+import { DEBOUNCE_DELAY } from "config";
 
 const NextImage = () => {
     const nextId = useSelector(selectNextModalId);
@@ -15,7 +16,7 @@ const NextImage = () => {
     const handleClickNext = React.useCallback(
         debounce(() => {
             nextId && setImageIdForModal(nextId);
-        }, 100),
+        }, DEBOUNCE_DELAY),
         [nextId]
     );
     return (

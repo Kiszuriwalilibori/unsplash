@@ -14,6 +14,7 @@ import { AppDispatch, FetchImages, RootState } from "types";
 import { selectAllImages } from "reduxware/redux/selectors";
 import { ImagesContentWrapper, Loading } from "../styled";
 import useMessage, { ShowMessage } from "hooks/useMessage";
+import { DEBOUNCE_DELAY } from "config";
 
 const ViewportBottomMarker = handleViewport(BottomControl);
 
@@ -33,7 +34,7 @@ const Images = (props: Props) => {
     const getMoreImages = useCallback(
         debounce(() => {
             fetchImages(subject, showMessage);
-        }, 300),
+        }, DEBOUNCE_DELAY),
         [fetchImages, subject]
     );
 

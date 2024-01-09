@@ -3,18 +3,19 @@ import { hideModal, showModal, setImageIdForModal } from "reduxware/redux";
 
 import { Details, RootState } from "types/index";
 
-const initialState: ModalState = {
-    isVisible: false,
-    details: {} as Details,
-    error: "",
-    id: "",
-};
 export interface ModalState {
     isVisible: boolean;
     details: Details;
     error: string;
     id: string;
 }
+
+const initialState: ModalState = {
+    isVisible: false,
+    details: {} as Details,
+    error: "",
+    id: "",
+};
 
 export const modalReducer = createReducer(initialState, builder => {
     builder

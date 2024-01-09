@@ -4,17 +4,17 @@ import { createOptions, createImageData, createUrls } from "functions";
 import { isNoHintsFoundVisible, getAllHints } from "../../reducers/hintsReducer";
 import { getAllImages } from "../../reducers/imagesReducer";
 import { getIdForModal } from "../../reducers/modalReducer";
-import { ImageData, Images } from "types";
+import { HintsState, ImagesState } from "types";
 import { selectIsOnline } from "reduxware/reducers/onlineReducer";
 
-const sortHints = (ary: string[]) => {
+const sortHints = (ary: HintsState["hints"]) => {
     const localeSort = Array.from(ary).sort((a, b) => {
         return a.localeCompare(b, "en", { sensitivity: "base" });
     });
     return localeSort;
 };
 
-const createModalData = (images: ImageData[], id: string) => {
+const createModalData = (images: ImagesState["imgs"], id: string) => {
     const image = images.find(item => item.id === id);
     return {
         location: image?.location?.city
@@ -29,13 +29,13 @@ const createModalData = (images: ImageData[], id: string) => {
     };
 };
 
-const createNextModalId = (ary: Images, id: string | null) => {
+const createNextModalId = (ary: ImagesState["imgs"], id: string | null) => {
     const index = ary.findIndex(item => item.id === id);
     const result = ary[index + 1] !== undefined ? ary[index + 1].id : null;
     return result;
 };
 
-const createPreviousModalId = (ary: Images, id: string) => {
+const createPreviousModalId = (ary: ImagesState["imgs"], id: string) => {
     const index = ary.findIndex(item => item.id === id);
     const result = ary[index + -1] !== undefined ? ary[index - 1].id : null;
     return result;

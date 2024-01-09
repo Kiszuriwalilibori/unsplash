@@ -8,7 +8,7 @@ export interface HintsState {
 }
 
 export const initialState: HintsState = {
-    hints: [] as Hints,
+    hints: [],
     isHintsMessageVisible: false,
 };
 

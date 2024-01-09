@@ -9,6 +9,7 @@ import { fetchImages } from "reduxware/redux/thunks";
 import { selectIsOnline } from "reduxware/redux/selectors";
 import { useMessage, useDispatchAction } from "hooks";
 import { ImageContainer } from "./styled";
+import { DEBOUNCE_DELAY } from "config";
 
 interface Props {
     id: string;
@@ -19,6 +20,9 @@ interface Props {
     loadHandler?: () => void;
     fetchImages: FetchImages;
 }
+
+const SIZES =
+    "(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw";
 
 const Image = (props: Props) => {
     const { id, user, description, urls, tags, loadHandler, fetchImages } = props;
@@ -32,23 +36,28 @@ const Image = (props: Props) => {
         debounce(() => {
             setImageIdForModal(id);
             showModal();
-        }, 100),
+        }, DEBOUNCE_DELAY),
         [id]
     );
+
+    const handleError = React.useCallback(() => loadHandler && loadHandler(), [loadHandler]);
+
+    const handleLoad = React.useCallback(() => {
+        refTags.current?.classList.add("visible");
+        loadHandler && loadHandler();
+    }, [loadHandler]);
+
     return (
         <figure className="images__item visible fade-in" data-user={`Author: ${user}`} data-description={description}>
             <ImageContainer data-user={`Author: ${user}`} data-description={description} onClick={handleClick}>
                 <img
                     className="image"
                     alt={description || "An image"}
-                    sizes="(min-width: 1335px) 416px, (min-width: 992px) calc(calc(100vw - 72px) / 3), (min-width: 768px) calc(calc(100vw - 48px) / 2), 100vw"
+                    sizes={SIZES}
                     srcSet={urls}
                     itemProp="thumbnailUrl"
-                    onLoad={() => {
-                        refTags.current?.classList.add("visible");
-                        loadHandler && loadHandler();
-                    }}
-                    onError={() => loadHandler && loadHandler()}
+                    onLoad={handleLoad}
+                    onError={handleError}
                 ></img>
             </ImageContainer>
             <ImageFigCaption ref={refTags}>
