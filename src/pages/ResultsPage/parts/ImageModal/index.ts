@@ -1,5 +1,3 @@
-// export { default } from "./ImageModal";
-
 import { connect } from "react-redux";
 
 import { RootState } from "types";
