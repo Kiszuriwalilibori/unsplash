@@ -1,4 +1,4 @@
-import { createUrls } from "js/functions";
+import { createUrls } from "functions";
 import { ImageData } from "types";
 
 const createImageData = (ary: ImageData[]) => {

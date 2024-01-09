@@ -1,7 +1,7 @@
 import Unsplash, { toJson } from "unsplash-js";
 import { showError, hideTemporaryBackground } from "reduxware/redux";
 
-import { setBackground } from "js/functions";
+import { setBackground } from "functions";
 import { AppDispatch, RootState } from "types";
 import { RANDOM_BACKGROUND_QUERY, ACCESS_KEY } from "config";
 import { ThunkAction } from "@reduxjs/toolkit";

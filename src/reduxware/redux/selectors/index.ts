@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { createOptions, createImageData, createUrls } from "js/functions";
+import { createOptions, createImageData, createUrls } from "functions";
 
 import { isNoHintsFoundVisible, getAllHints } from "../../reducers/hintsReducer";
 import { getAllImages } from "../../reducers/imagesReducer";

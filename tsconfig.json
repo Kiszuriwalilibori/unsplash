@@ -28,7 +28,8 @@
             "pages": ["pages/*"],
             "reduxware": ["reduxware/*"],
             "assets/*": ["assets/*"],
-            "icons/*": ["assets/icons/*"]
+            "icons/*": ["assets/icons/*"],
+            "functions/*": ["functions/*"]
         }
     },
     "include": ["src"]

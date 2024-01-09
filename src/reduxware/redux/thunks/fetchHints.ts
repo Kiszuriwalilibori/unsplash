@@ -4,7 +4,7 @@ import { clearHints, getHints, hideHintsMsg, showError } from "reduxware/redux";
 import { ThunkAction } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 
-import { createTags } from "js/functions";
+import { createTags } from "functions";
 import { ACCESS_KEY, INPUT_LENGTH_THRESHOLD, NUMBER_OF_HINTS } from "config";
 import { AppDispatch, GetState, RootState } from "types";
 
