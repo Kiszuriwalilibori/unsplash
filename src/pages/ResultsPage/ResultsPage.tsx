@@ -1,6 +1,6 @@
 import React from "react";
 
-import MyModal from "./parts/ImageModal";
+import ImageModal from "./parts/ImageModal";
 import Images from "./parts/Images";
 
 import { ResultsPageContainer, ResultsPageFormContainer } from "./styled";
@@ -15,7 +15,7 @@ const ResultsPage = () => {
             <ResultsPageFormContainer>
                 <Form />
             </ResultsPageFormContainer>
-            <MyModal />
+            <ImageModal />
             <Images />
         </ResultsPageContainer>
     );
