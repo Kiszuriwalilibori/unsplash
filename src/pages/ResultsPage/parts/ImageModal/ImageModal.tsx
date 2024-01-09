@@ -1,18 +1,21 @@
 import * as React from "react";
-import FocusTrap from "focus-trap-react";
+import Modal from "@mui/material/Modal";
+
 import { useSelector } from "react-redux";
-
 import { Author, Close, Image, Like, ToPreviousImage, ToNextImage, Place, Share, Info, Add } from "./parts";
-
 import { selectDataForModal } from "reduxware/redux/selectors";
 
-const ModalContent = React.forwardRef((props, ref) => {
-    const { location, author, twitter, urls, profileImage } = useSelector(selectDataForModal);
+interface Props {
+    isModalVisible: boolean;
+}
 
+export const ImageModal = (props: Props) => {
+    const { location, author, twitter, urls, profileImage } = useSelector(selectDataForModal);
+    const { isModalVisible } = props;
     if (!urls) return null;
 
     return (
-        <FocusTrap>
+        <Modal open={isModalVisible} id="my-modal">
             <div className="modal-content__container fade-in">
                 <Close />
                 <ToPreviousImage />
@@ -33,12 +36,6 @@ const ModalContent = React.forwardRef((props, ref) => {
                 </article>
                 <ToNextImage />
             </div>
-        </FocusTrap>
+        </Modal>
     );
-});
-
-export default ModalContent;
-
-/**
- * todo własciwie urls jest mocno wykluczjące, może by pobrać i sprawdzić urls o poziom wyżej
- * */
+};

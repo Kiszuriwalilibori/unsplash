@@ -1,6 +1,6 @@
 import React from "react";
 
-import MyModal from "./parts/Modal";
+import MyModal from "./parts/ImageModal";
 import Images from "./parts/Images";
 
 import { ResultsPageContainer, ResultsPageFormContainer } from "./styled";
