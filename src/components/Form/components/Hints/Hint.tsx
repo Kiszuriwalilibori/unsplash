@@ -20,7 +20,7 @@ const Hint = (props: Props) => {
     const showMessage = useMessage();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const hendleClick = useCallback(
+    const handleClick = useCallback(
         debounce(() => {
             fetchImages(hint, showMessage);
         }, 200),
@@ -29,7 +29,7 @@ const Hint = (props: Props) => {
 
     if (!hint) return null;
     return (
-        <button disabled={!isOnline} className="hint" onClick={hendleClick} tabIndex={0}>
+        <button disabled={!isOnline} className="hint" onClick={handleClick} tabIndex={0}>
             {hint}
         </button>
     );

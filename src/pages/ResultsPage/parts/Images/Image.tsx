@@ -28,7 +28,7 @@ const Image = (props: Props) => {
     const showMessage = useMessage();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const clickHandler = React.useCallback(
+    const handleClick = React.useCallback(
         debounce(() => {
             setImageIdForModal(id);
             showModal();
@@ -37,7 +37,7 @@ const Image = (props: Props) => {
     );
     return (
         <figure className="images__item visible fade-in" data-user={`Author: ${user}`} data-description={description}>
-            <ImageContainer data-user={`Author: ${user}`} data-description={description} onClick={clickHandler}>
+            <ImageContainer data-user={`Author: ${user}`} data-description={description} onClick={handleClick}>
                 <img
                     className="image"
                     alt={description || "An image"}

@@ -42,7 +42,7 @@ const SearchForm = (props: Props) => {
         [isMainPage]
     );
 
-    const handleReset = React.useCallback(() => {
+    const handleClickReset = React.useCallback(() => {
         reset();
         clearHints();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,7 +77,7 @@ const SearchForm = (props: Props) => {
                     className="form__button--reset"
                     type="reset"
                     aria-label="Clear form"
-                    onClick={handleReset}
+                    onClick={handleClickReset}
                 >
                     <Icons.Reset />
                 </BasicButton>

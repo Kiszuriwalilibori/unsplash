@@ -12,14 +12,14 @@ const NextImage = () => {
     const nextId = useSelector(selectNextModalId);
     const { setImageIdForModal } = useDispatchAction();
 
-    const showModal = React.useCallback(
+    const handleClickNext = React.useCallback(
         debounce(() => {
             nextId && setImageIdForModal(nextId);
         }, 100),
         [nextId]
     );
     return (
-        <aside className="modal-content__aside right" onClick={showModal} aria-label="next image">
+        <aside className="modal-content__aside right" onClick={handleClickNext} aria-label="next image">
             <button className="modal-content__arrow-button" disabled={!nextId}>
                 <Icons.Next className={nextId ? "modal-content__arrow-svg visible" : "modal-content__arrow-svg"} />
             </button>
