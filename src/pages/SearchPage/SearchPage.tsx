@@ -1,13 +1,13 @@
 import * as React from "react";
+import Stack from "@mui/material/Stack";
 
 import { connect } from "react-redux";
 
 import { Header, Trending } from "./parts";
 import { ErrorMessage, Form, InitialScreen } from "components";
-import { trending } from "js/fixtures";
+import { TRENDING } from "config";
 import { useCheckApiKey, useDispatchAction } from "hooks";
-import { RootState } from "components/AppProvider";
-import Stack from "@mui/material/Stack";
+import { RootState } from "types";
 
 interface Props {
     isWithTemporaryBackground: boolean;
@@ -30,7 +30,7 @@ const SearchPage = (props: Props) => {
             {isKeyAvailable && (
                 <Stack spacing={3}>
                     <Form />
-                    <Trending ary={trending} />
+                    <Trending ary={TRENDING} />
                 </Stack>
             )}
             <ErrorMessage />

@@ -1,6 +1,6 @@
 import Unsplash, { toJson } from "unsplash-js";
 
-import { ACCESS_KEY, NUMBER_OF_IMAGES } from "js/fixtures";
+import { ACCESS_KEY, NUMBER_OF_IMAGES } from "config";
 import { clearImages, setImages, setCollectionLength, initialState } from "../../reducers/imagesReducer";
 import { showError } from "reduxware/redux";
 import { AppDispatch, GetState, RootState, ShowMessage } from "types";

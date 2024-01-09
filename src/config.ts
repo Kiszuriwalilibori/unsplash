@@ -1,7 +1,5 @@
-import { UnsplashApi } from "unsplash-js";
-
 export const ACCESS_KEY = { accessKey: process.env.REACT_APP_ACCESS_KEY };
-export const trending = ["flowers", "wallpapers", "backgrounds", "happy", "love"];
+export const TRENDING = ["flowers", "wallpapers", "backgrounds", "happy", "love"];
 
 export const fallbackBackground = {
     mobile: "url(../images/background_mobile.jpg) no-repeat center center fixed",

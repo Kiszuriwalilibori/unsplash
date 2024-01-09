@@ -5,7 +5,7 @@ import { ThunkAction } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 
 import { createTags } from "js/functions";
-import { ACCESS_KEY, INPUT_LENGTH_THRESHOLD, NUMBER_OF_HINTS } from "js/fixtures";
+import { ACCESS_KEY, INPUT_LENGTH_THRESHOLD, NUMBER_OF_HINTS } from "config";
 import { AppDispatch, GetState, RootState } from "types";
 
 export function fetchHints(pattern: string): ThunkAction<void, RootState, undefined, AnyAction> {

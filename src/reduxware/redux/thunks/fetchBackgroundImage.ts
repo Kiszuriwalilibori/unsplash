@@ -3,7 +3,7 @@ import { showError, hideTemporaryBackground } from "reduxware/redux";
 
 import { setBackground } from "js/functions";
 import { AppDispatch, RootState } from "types";
-import { RANDOM_BACKGROUND_QUERY, ACCESS_KEY } from "js/fixtures";
+import { RANDOM_BACKGROUND_QUERY, ACCESS_KEY } from "config";
 import { ThunkAction } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 

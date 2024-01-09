@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 import { setIsOnline } from "reduxware/redux";
-import { RootState } from "components/AppProvider";
+import { RootState } from "types";
 
 const initialState = { isOnline: true };
 export const onlineReducer = createReducer(initialState, builder => {
