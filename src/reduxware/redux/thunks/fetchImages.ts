@@ -7,6 +7,14 @@ import { AppDispatch, GetState, RootState, ShowMessage } from "types";
 import { ThunkAction } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 
+const fetchFullImage = (id: string) => {
+    return fetch(`https://api.unsplash.com/photos/${id}`, {
+        headers: {
+            Authorization: `Client-ID ${ACCESS_KEY.accessKey}`,
+        },
+    }).then(response => response.json());
+};
+
 export function fetchImages(
     pattern: string,
     showMessage: ShowMessage
@@ -40,14 +48,25 @@ export function fetchImages(
                             const errors = json.errors
                                 ? json.errors.join(", ")
                                 : json.statusText
-                                ? json.statusText
-                                : "Unknown error during fetching images";
+                                  ? json.statusText
+                                  : "Unknown error during fetching images";
 
                             dispatch(showError(errors));
                             return;
                         } else {
-                            dispatch(setImages(json.results));
-                            dispatch(setCollectionLength(json.total_pages));
+                            Promise.all(json.results.map((image: { id: string }) => fetchFullImage(image.id)))
+                                .then(fullImages => {
+                                    dispatch(setImages(fullImages));
+                                    dispatch(setCollectionLength(json.total_pages));
+                                })
+                                .catch(err => {
+                                    const message =
+                                        err instanceof Error
+                                            ? err.message
+                                            : "Unknown error occured when fetching image details";
+
+                                    dispatch(showError(message));
+                                });
                         }
                     })
                     .catch(err => {
